@@ -90,7 +90,7 @@ const Index = () => {
 
   const handleTaskSelect = (task: Task) => {
     setCurrentTask(task);
-    setTimeLeft(task.timeInSeconds ? task.timeInSeconds / 60 : null);
+    setTimeLeft(task.timeInSeconds || null);
   };
 
   const calculateProgress = () => {
