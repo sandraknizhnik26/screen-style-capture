@@ -1,16 +1,23 @@
 
 import React, { useEffect, useState } from 'react';
-import { Circle } from 'lucide-react';
+import { Play, Timer } from 'lucide-react';
 import { format } from 'date-fns';
+import { Button } from '@/components/ui/button';
 
 interface ClockProps {
   timeLeft: number;
   totalTime: number;
 }
 
-const Clock: React.FC<ClockProps> = ({ timeLeft, totalTime }) => {
+const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [timeLeft, setTimeLeft] = useState(initialTimeLeft);
+  const [isRunning, setIsRunning] = useState(false);
   
+  useEffect(() => {
+    setTimeLeft(initialTimeLeft);
+  }, [initialTimeLeft]);
+
   // Update current time every second
   useEffect(() => {
     const timer = setInterval(() => {
@@ -18,6 +25,17 @@ const Clock: React.FC<ClockProps> = ({ timeLeft, totalTime }) => {
     }, 1000);
     return () => clearInterval(timer);
   }, []);
+
+  // Timer countdown effect
+  useEffect(() => {
+    let intervalId: NodeJS.Timeout;
+    if (isRunning && timeLeft > 0) {
+      intervalId = setInterval(() => {
+        setTimeLeft((prev) => Math.max(0, prev - 1));
+      }, 1000);
+    }
+    return () => clearInterval(intervalId);
+  }, [isRunning]);
 
   // Calculate progress percentage (from 0 to 100)
   const progress = Math.min(100, Math.max(0, (timeLeft / totalTime) * 100));
@@ -31,6 +49,15 @@ const Clock: React.FC<ClockProps> = ({ timeLeft, totalTime }) => {
   const minutes = Math.floor(timeLeft / 60);
   const seconds = Math.floor(timeLeft % 60);
   const timeDisplay = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+  const handlePlayPause = () => {
+    setIsRunning(!isRunning);
+  };
+
+  const handleReset = () => {
+    setIsRunning(false);
+    setTimeLeft(initialTimeLeft);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center w-full p-4">
@@ -76,8 +103,29 @@ const Clock: React.FC<ClockProps> = ({ timeLeft, totalTime }) => {
           </span>
         </div>
       </div>
+
+      {/* Control buttons */}
+      <div className="flex gap-2 mt-4">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={handlePlayPause}
+          className="w-12 h-12"
+        >
+          <Play className={`h-6 w-6 ${isRunning ? 'text-green-500' : ''}`} />
+        </Button>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={handleReset}
+          className="w-12 h-12"
+        >
+          <Timer className="h-6 w-6" />
+        </Button>
+      </div>
     </div>
   );
 };
 
 export default Clock;
+
