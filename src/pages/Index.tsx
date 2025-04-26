@@ -202,15 +202,7 @@ const Index = () => {
               </div>
 
               <div className={`${isDarkMode ? 'bg-gray-700' : 'bg-white'} rounded-lg border ${isDarkMode ? 'border-gray-600' : 'border-gray-200'} p-3 shadow-sm transition-colors duration-200`}>
-                <h2 className={`text-sm font-medium mb-2 ${isDarkMode ? 'text-gray-200' : ''} transition-colors duration-200`}>Current Task</h2>
-                <div className={`text-center text-xs mb-2 ${isDarkMode ? 'text-gray-300' : ''} transition-colors duration-200`}>
-                  {currentTask ? currentTask.title : "No task selected"}
-                </div>
                 <Clock timeLeft={timeLeft || 0} totalTime={totalTime} />
-              </div>
-
-              <div className="md:hidden mt-4 px-4">
-                <ProgressBar progress={calculateProgress()} />
               </div>
 
               <div className="flex flex-col md:flex-row gap-6">

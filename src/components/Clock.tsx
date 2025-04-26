@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Play, Pause, RotateCcw } from 'lucide-react';
+import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -68,6 +69,15 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) =
 
   return (
     <div className="flex flex-col items-center justify-center w-full p-4">
+      <div className="text-2xl font-medium mb-4">
+        {format(currentTime, 'HH:mm')}
+      </div>
+      
+      <h2 className="text-sm font-medium mb-2">Current Task</h2>
+      <div className="text-center text-xs mb-4">
+        {currentTask ? currentTask.title : "No task selected"}
+      </div>
+
       <div className={`relative ${clockSize}`}>
         <svg className="w-full h-full transform -rotate-90" viewBox="0 0 200 200">
           <circle 
@@ -97,7 +107,7 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) =
           <span className={`font-bold ${timeTextSize}`}>
             {timeDisplay}
           </span>
-          <span className="text-sm opacity-60">
+          <span className="text-xs opacity-60">
             minutes left
           </span>
         </div>
