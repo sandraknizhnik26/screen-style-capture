@@ -19,10 +19,8 @@ const Clock: React.FC<ClockProps> = ({ timeLeft }) => {
     return () => clearInterval(timer);
   }, []);
 
-  // Format the countdown time in seconds
-  const minutes = Math.floor(timeLeft / 60);
-  const seconds = Math.floor(timeLeft % 60);
-  const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  // Calculate minutes from timeLeft (in seconds)
+  const minutes = Math.ceil(timeLeft / 60);
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full space-y-4">
