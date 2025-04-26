@@ -34,7 +34,7 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) =
     return () => clearInterval(intervalId);
   }, [isRunning]);
 
-  const progress = Math.min(100, Math.max(0, (timeLeft / totalTime) * 100));
+  const progress = Math.min(100, Math.max(0, ((totalTime - timeLeft) / totalTime) * 100));
   
   const radius = 90;
   const circumference = 2 * Math.PI * radius;
@@ -66,7 +66,7 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) =
             cy="100" 
             r={radius} 
             fill="none" 
-            stroke={`currentColor`}
+            stroke="currentColor"
             strokeWidth="4"
             className="opacity-10"
           />
