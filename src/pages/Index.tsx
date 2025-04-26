@@ -134,7 +134,6 @@ const Index = () => {
     document.documentElement.dir = newLanguage === 'he' ? 'rtl' : 'ltr';
   };
 
-  // Optional header for sidebar
   const SidebarHeader = (
     <div className="flex flex-col items-center py-4 space-y-2">
       <h2 className="text-sm font-medium text-gray-600">Quick Actions</h2>
@@ -207,6 +206,10 @@ const Index = () => {
                 <Clock timeLeft={timeLeft || 0} totalTime={totalTime} />
               </div>
 
+              <div className="md:hidden mt-4 px-4">
+                <ProgressBar progress={calculateProgress()} />
+              </div>
+
               <div className="flex flex-col">
                 <div className="flex justify-between items-center mb-3">
                   <h2 className={`text-sm font-medium ${isDarkMode ? 'text-gray-200' : ''} transition-colors duration-200`}>Task</h2>
@@ -227,7 +230,7 @@ const Index = () => {
             </div>
           </div>
 
-          <div className={`flex items-center justify-between p-4 border-t ${isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200'} transition-colors duration-200`}>
+          <div className={`hidden md:flex items-center justify-between p-4 border-t ${isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200'} transition-colors duration-200`}>
             <div className="flex items-center gap-4">
               <LanguageSwitcher currentLanguage={language} onLanguageChange={handleLanguageChange} />
               <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleDarkMode} />
