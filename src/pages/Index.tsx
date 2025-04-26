@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Settings, LogOut, QrCode, FileText } from 'lucide-react';
 
@@ -71,6 +70,12 @@ const Index = () => {
       stars: 2
     },
   ]);
+
+  const calculateProgress = () => {
+    const totalTasks = tasks.length;
+    const completedTasks = tasks.filter(task => task.completed).length;
+    return Math.floor((completedTasks / totalTasks) * 100);
+  };
 
   const toggleTaskCompletion = (taskId: string) => {
     setTasks(tasks.map(task => 
@@ -168,7 +173,7 @@ const Index = () => {
       
       {/* Right progress bar */}
       <div className="w-10 flex items-center justify-center px-2 py-8 border-l border-gray-200">
-        <ProgressBar progress={65} />
+        <ProgressBar progress={calculateProgress()} />
       </div>
     </div>
   );
