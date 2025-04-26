@@ -152,7 +152,7 @@ const Index = () => {
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full" dir={language === 'he' ? 'rtl' : 'ltr'}>
+      <div className="min-h-screen flex w-full relative" dir={language === 'he' ? 'rtl' : 'ltr'}>
         <div className={`hidden md:flex flex-col items-center w-40 bg-background border-r ${language === 'he' ? 'border-r-0 border-l' : ''}`}>
           <MainSidebar 
             selectedMood={selectedMood} 
@@ -247,6 +247,15 @@ const Index = () => {
                 <div className="hidden md:block h-full">
                   <ProgressBar progress={calculateProgress()} />
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="fixed bottom-0 left-0 right-0 md:hidden">
+            <div className={`flex items-center justify-between p-4 border-t ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} transition-colors duration-200`}>
+              <div className="flex items-center gap-4">
+                <LanguageSwitcher currentLanguage={language} onLanguageChange={handleLanguageChange} />
+                <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleDarkMode} />
               </div>
             </div>
           </div>
