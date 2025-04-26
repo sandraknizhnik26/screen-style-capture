@@ -5,7 +5,7 @@ interface LogoIconProps {
   className?: string;
 }
 
-const LogoIcon: React.FC<LogoIconProps> = ({ className = "h-32 w-32" }) => {
+const LogoIcon: React.FC<LogoIconProps> = ({ className = "h-48 w-48" }) => {
   return (
     <div className={`relative ${className}`}>
       <div className="absolute inset-0 flex items-center justify-center">
