@@ -153,8 +153,8 @@ const Index = () => {
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full">
-        <div className="hidden md:flex flex-col items-center w-40 bg-background border-r">
+      <div className="min-h-screen flex w-full" dir={language === 'he' ? 'rtl' : 'ltr'}>
+        <div className={`hidden md:flex flex-col items-center w-40 bg-background border-r ${language === 'he' ? 'border-r-0 border-l' : ''}`}>
           <MainSidebar 
             selectedMood={selectedMood} 
             onMoodSelect={setSelectedMood} 
