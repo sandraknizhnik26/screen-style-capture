@@ -133,73 +133,60 @@ const Index = () => {
   };
 
   return (
-    <div className={`max-w-5xl mx-auto my-4 min-h-[calc(100vh-2rem)] flex flex-col md:flex-row ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-gray-50 text-gray-900'} border border-gray-300 rounded-md overflow-hidden transition-colors duration-200`}>
-      <div className={`w-full md:w-32 ${isDarkMode ? 'bg-gray-900' : 'bg-slate-50'} p-3 border-b md:border-b-0 md:border-r ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} flex flex-row md:flex-col transition-colors duration-200`}>
-        <div className="mb-6">
+    <div className={`max-w-5xl mx-auto my-4 min-h-[calc(100vh-2rem)] flex flex-col ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-gray-50 text-gray-900'} border border-gray-300 rounded-md overflow-hidden transition-colors duration-200`}>
+      {/* Header with Logo and Settings */}
+      <div className="flex justify-between items-center p-4 border-b border-gray-200">
+        <div className="w-20 h-20">
           <Logo />
         </div>
-        
-        <div className="flex-1 space-y-6">
-          <MoodSelector selectedMood={selectedMood} onMoodSelect={setSelectedMood} />
-          
-          <div className="space-y-2">
-            <button className={`w-full text-[10px] py-1 px-1.5 rounded mb-1 text-left ${isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'} transition-colors duration-200`}>
-              {language === 'en' ? 'View recommendations' : 'צפה בהמלצות'}
-            </button>
-            <button className="w-full text-[10px] py-1 px-1.5 rounded mb-1 text-left bg-cyan-500 text-white hover:bg-cyan-600 transition-colors duration-200">
-              {language === 'en' ? 'Do a new assessment' : 'בצע הערכה חדשה'}
-            </button>
-            <button className={`w-full text-[10px] py-1 px-1.5 rounded mb-1 text-left ${isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'} transition-colors duration-200`}>
-              {language === 'en' ? 'My assessments' : 'ההערכות שלי'}
-            </button>
-          </div>
-        </div>
-        
-        <div className={`mt-auto pt-3 border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} transition-colors duration-200`}>
-          <div className="flex items-center justify-between mb-3">
-            <span className={`text-[10px] ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-200`}>
-              {language === 'en' ? 'Help/ support' : 'עזרה ותמיכה'}
-            </span>
-            <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleDarkMode} />
-          </div>
-          <div className="flex justify-between">
-            <LanguageSwitcher currentLanguage={language} onLanguageChange={handleLanguageChange} />
-            <button className={`p-1 border ${isDarkMode ? 'border-gray-700' : 'border-gray-300'} rounded-sm transition-colors duration-200`}>
-              <QrCode className={`h-3 w-3 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-200`} />
-            </button>
-            <button className={`p-1 border ${isDarkMode ? 'border-gray-700' : 'border-gray-300'} rounded-sm transition-colors duration-200`}>
-              <FileText className={`h-3 w-3 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-200`} />
-            </button>
-          </div>
+        <div className={`flex items-center ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-100'} rounded-lg border shadow-sm overflow-hidden transition-colors duration-200`}>
+          <button className={`flex items-center ${isDarkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-50'} px-3 py-1 text-xs transition-colors duration-200`}>
+            <Settings className="h-3 w-3 mr-1" />
+            Settings
+          </button>
+          <div className={`h-4 border-r ${isDarkMode ? 'border-gray-600' : 'border-gray-200'} transition-colors duration-200`}></div>
+          <button className={`flex items-center ${isDarkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-50'} px-3 py-1 text-xs transition-colors duration-200`}>
+            <LogOut className="h-3 w-3 mr-1" />
+            Log out
+          </button>
         </div>
       </div>
-      
-      <div className={`flex-1 p-4 ${isDarkMode ? 'bg-gray-800' : 'bg-white'} transition-colors duration-200`}>
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-xl font-semibold">Good morning, Roni</h1>
-          <div className={`flex items-center ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-100'} rounded-lg border shadow-sm overflow-hidden transition-colors duration-200`}>
-            <button className={`flex items-center ${isDarkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-50'} px-3 py-1 text-xs transition-colors duration-200`}>
-              <Settings className="h-3 w-3 mr-1" />
-              Settings
-            </button>
-            <div className={`h-4 border-r ${isDarkMode ? 'border-gray-600' : 'border-gray-200'} transition-colors duration-200`}></div>
-            <button className={`flex items-center ${isDarkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-50'} px-3 py-1 text-xs transition-colors duration-200`}>
-              <LogOut className="h-3 w-3 mr-1" />
-              Log out
-            </button>
-          </div>
+
+      <div className="flex-1 p-4">
+        {/* Greeting */}
+        <h1 className="text-xl font-semibold text-center mb-6">Good morning, Roni</h1>
+
+        {/* Mood Selector */}
+        <div className="mb-6">
+          <MoodSelector selectedMood={selectedMood} onMoodSelect={setSelectedMood} />
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className={`col-span-1 ${isDarkMode ? 'bg-gray-700' : 'bg-white'} rounded-lg border ${isDarkMode ? 'border-gray-600' : 'border-gray-200'} p-3 shadow-sm transition-colors duration-200`}>
+
+        {/* Action Buttons */}
+        <div className="flex justify-center gap-2 mb-6">
+          <button className={`text-[10px] py-1 px-1.5 rounded mb-1 text-left ${isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'} transition-colors duration-200`}>
+            View recommendations
+          </button>
+          <button className="text-[10px] py-1 px-1.5 rounded mb-1 text-left bg-cyan-500 text-white hover:bg-cyan-600 transition-colors duration-200">
+            Do a new assessment
+          </button>
+          <button className={`text-[10px] py-1 px-1.5 rounded mb-1 text-left ${isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'} transition-colors duration-200`}>
+            My assessments
+          </button>
+        </div>
+
+        {/* Tasks Section */}
+        <div className="grid grid-cols-1 gap-6">
+          {/* Current Task with Clock */}
+          <div className={`${isDarkMode ? 'bg-gray-700' : 'bg-white'} rounded-lg border ${isDarkMode ? 'border-gray-600' : 'border-gray-200'} p-3 shadow-sm transition-colors duration-200`}>
             <h2 className={`text-sm font-medium mb-2 ${isDarkMode ? 'text-gray-200' : ''} transition-colors duration-200`}>Current Task</h2>
             <div className={`text-center text-xs mb-2 ${isDarkMode ? 'text-gray-300' : ''} transition-colors duration-200`}>
               {currentTask ? currentTask.title : "No task selected"}
             </div>
             <Clock timeLeft={timeLeft || 0} totalTime={totalTime} />
           </div>
-          
-          <div className="col-span-1 md:col-span-2 flex flex-col">
+
+          {/* Task List */}
+          <div className="flex flex-col">
             <div className="flex justify-between items-center mb-3">
               <h2 className={`text-sm font-medium ${isDarkMode ? 'text-gray-200' : ''} transition-colors duration-200`}>Task</h2>
               <span className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-200`}>today</span>
@@ -218,8 +205,13 @@ const Index = () => {
           </div>
         </div>
       </div>
-      
-      <div className={`w-full md:w-10 flex md:flex-col items-center justify-center p-2 md:px-2 md:py-8 border-t md:border-t-0 md:border-l ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} ${isDarkMode ? 'bg-gray-900' : ''} transition-colors duration-200`}>
+
+      {/* Footer with Controls and Progress */}
+      <div className={`flex items-center justify-between p-4 border-t ${isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200'} transition-colors duration-200`}>
+        <div className="flex items-center gap-4">
+          <LanguageSwitcher currentLanguage={language} onLanguageChange={handleLanguageChange} />
+          <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleDarkMode} />
+        </div>
         <ProgressBar progress={calculateProgress()} />
       </div>
     </div>
