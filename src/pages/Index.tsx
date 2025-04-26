@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Settings, LogOut } from 'lucide-react';
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -152,8 +153,8 @@ const Index = () => {
 
   return (
     <SidebarProvider>
-      <div className="h-screen max-w-5xl mx-auto p-4 flex w-full">
-        <div className="hidden md:flex flex-col items-center w-40 border-r">
+      <div className="min-h-screen flex w-full">
+        <div className="hidden md:flex flex-col items-center w-40 bg-background border-r">
           <MainSidebar 
             selectedMood={selectedMood} 
             onMoodSelect={setSelectedMood} 
@@ -161,7 +162,7 @@ const Index = () => {
           />
         </div>
         
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 max-w-5xl mx-auto p-4 w-full">
           <div className="md:hidden flex flex-col items-center py-4">
             <Logo />
             <div className={`flex items-center ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-100'} rounded-lg border shadow-sm overflow-hidden mt-4 transition-colors duration-200`}>
