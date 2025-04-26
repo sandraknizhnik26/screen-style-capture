@@ -210,21 +210,26 @@ const Index = () => {
                 <ProgressBar progress={calculateProgress()} />
               </div>
 
-              <div className="flex flex-col">
-                <div className="flex justify-between items-center mb-3">
-                  <h2 className={`text-sm font-medium ${isDarkMode ? 'text-gray-200' : ''} transition-colors duration-200`}>Task</h2>
-                  <span className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-200`}>today</span>
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="flex-1">
+                  <div className="flex justify-between items-center mb-3">
+                    <h2 className={`text-sm font-medium ${isDarkMode ? 'text-gray-200' : ''} transition-colors duration-200`}>Task</h2>
+                    <span className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-200`}>today</span>
+                  </div>
+                  <div className="space-y-1.5 flex-1">
+                    {tasks.map(task => (
+                      <TaskItem
+                        key={task.id}
+                        {...task}
+                        onToggleComplete={toggleTaskCompletion}
+                        onSelect={() => handleTaskSelect(task)}
+                        isSelected={currentTask?.id === task.id}
+                      />
+                    ))}
+                  </div>
                 </div>
-                <div className="space-y-1.5 flex-1">
-                  {tasks.map(task => (
-                    <TaskItem
-                      key={task.id}
-                      {...task}
-                      onToggleComplete={toggleTaskCompletion}
-                      onSelect={() => handleTaskSelect(task)}
-                      isSelected={currentTask?.id === task.id}
-                    />
-                  ))}
+                <div className="hidden md:block w-6">
+                  <ProgressBar progress={calculateProgress()} />
                 </div>
               </div>
             </div>
@@ -235,7 +240,6 @@ const Index = () => {
               <LanguageSwitcher currentLanguage={language} onLanguageChange={handleLanguageChange} />
               <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleDarkMode} />
             </div>
-            <ProgressBar progress={calculateProgress()} />
           </div>
         </div>
       </div>
