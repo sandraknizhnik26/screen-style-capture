@@ -9,24 +9,51 @@ interface ClockProps {
 const Clock: React.FC<ClockProps> = ({ timeLeft, totalTime }) => {
   const [minutes, setMinutes] = useState(Math.floor(timeLeft / 60));
   const [seconds, setSeconds] = useState(timeLeft % 60);
+  const [isRunning, setIsRunning] = useState(false);
   
   useEffect(() => {
     setMinutes(Math.floor(timeLeft / 60));
     setSeconds(timeLeft % 60);
+    if (timeLeft > 0) {
+      setIsRunning(true);
+    }
   }, [timeLeft]);
 
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    
+    if (isRunning && timeLeft > 0) {
+      interval = setInterval(() => {
+        if (seconds > 0) {
+          setSeconds(seconds - 1);
+        } else if (minutes > 0) {
+          setMinutes(minutes - 1);
+          setSeconds(59);
+        } else {
+          setIsRunning(false);
+        }
+      }, 1000);
+    }
+
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [isRunning, minutes, seconds]);
+
   // Calculate angle for hour hand (360 degrees / total seconds * seconds left)
-  const hourHandAngle = 120; // Fixed to match the image (pointing to 4)
+  const hourHandAngle = (360 / totalTime) * timeLeft;
   
   // Calculate the percentage of time completed for the background fill
-  const completedPercentage = 35; // Fixed to match the image
+  const completedPercentage = ((totalTime - timeLeft) / totalTime) * 100;
 
   return (
     <div className="relative w-28 h-28 mx-auto">
       {/* Clock background with progress */}
       <div className="absolute inset-0 rounded-full border border-gray-200 bg-white overflow-hidden">
         <div 
-          className="absolute top-0 right-0 bottom-0 bg-red-100 opacity-60" 
+          className="absolute top-0 right-0 bottom-0 bg-red-100 opacity-60 transition-all duration-1000" 
           style={{ width: `${completedPercentage}%` }}
         ></div>
       </div>
@@ -67,7 +94,7 @@ const Clock: React.FC<ClockProps> = ({ timeLeft, totalTime }) => {
           
           {/* Hour hand */}
           <div 
-            className="absolute w-0.5 bg-gray-700 rounded-full origin-bottom transform -translate-x-1/2"
+            className="absolute w-0.5 bg-gray-700 rounded-full origin-bottom transform -translate-x-1/2 transition-transform duration-1000"
             style={{ 
               height: '35%', 
               left: '50%',

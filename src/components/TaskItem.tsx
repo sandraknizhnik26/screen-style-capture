@@ -10,6 +10,7 @@ interface TaskItemProps {
   category: 'red' | 'green' | 'orange' | 'blue' | 'yellow' | 'purple';
   stars: number;
   onToggleComplete: (id: string) => void;
+  onSelect: () => void;
 }
 
 const categoryColors = {
@@ -28,13 +29,19 @@ const TaskItem: React.FC<TaskItemProps> = ({
   completed, 
   category, 
   stars,
-  onToggleComplete 
+  onToggleComplete,
+  onSelect 
 }) => {
   return (
-    <div className={`flex items-center p-2 rounded-md mb-1 ${categoryColors[category]}`}>
-      <div className="mr-2">
+    <div 
+      className={`flex items-center p-2 rounded-md mb-1 ${categoryColors[category]} cursor-pointer hover:opacity-90`}
+      onClick={onSelect}
+    >
+      <div className="mr-2" onClick={(e) => {
+        e.stopPropagation();
+        onToggleComplete(id);
+      }}>
         <button
-          onClick={() => onToggleComplete(id)}
           className={`h-4 w-4 rounded-full border-2 border-gray-400 flex items-center justify-center ${
             completed ? 'bg-green-500 border-green-500' : 'bg-white'
           }`}
