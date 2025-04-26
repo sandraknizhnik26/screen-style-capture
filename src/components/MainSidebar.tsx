@@ -1,7 +1,6 @@
 
 import React from 'react';
 import {
-  Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
@@ -18,7 +17,7 @@ interface MainSidebarProps {
 
 const MainSidebar = ({ selectedMood, onMoodSelect, headerContent }: MainSidebarProps) => {
   return (
-    <Sidebar className="hidden md:flex">
+    <div className="hidden md:block h-full">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent className="flex flex-col items-center py-4">
@@ -50,7 +49,7 @@ const MainSidebar = ({ selectedMood, onMoodSelect, headerContent }: MainSidebarP
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-    </Sidebar>
+    </div>
   );
 };
 
