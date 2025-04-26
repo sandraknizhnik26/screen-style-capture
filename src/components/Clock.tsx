@@ -55,7 +55,7 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime, cur
     ? Math.min(100, Math.max(0, (timeLeft / totalTime) * 100))
     : 0;
   
-  const radius = isMobile ? 70 : 90;
+  const radius = isMobile ? 70 : 80;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - ((100 - progress) / 100) * circumference;
   
@@ -76,17 +76,17 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime, cur
     setHasStarted(false);
   };
 
-  const clockSize = isMobile ? "w-52 h-52" : "w-64 h-64";
-  const timeTextSize = isMobile ? "text-4xl" : "text-6xl";
+  const clockSize = isMobile ? "w-52 h-52" : "w-56 h-56";
+  const timeTextSize = isMobile ? "text-4xl" : "text-5xl";
 
   return (
-    <div className="flex flex-col items-center justify-center w-full p-4">
-      <div className="text-2xl font-medium mb-4">
+    <div className="flex flex-col items-center justify-center w-full p-2">
+      <div className="text-xl font-medium mb-2">
         {format(currentTime, 'HH:mm')}
       </div>
       
-      <h2 className="text-sm font-medium mb-2">Current Task</h2>
-      <div className="text-center text-xs mb-4">
+      <h2 className="text-sm font-medium mb-1">Current Task</h2>
+      <div className="text-center text-xs mb-2">
         {currentTask ? currentTask.title : "No task selected"}
       </div>
 
