@@ -14,8 +14,8 @@ const MoodSelector: React.FC<MoodSelectorProps> = ({ selectedMood, onMoodSelect 
   ];
 
   return (
-    <div className="mb-3">
-      <p className="text-[10px] text-gray-600 mb-1.5">How am I feeling today?</p>
+    <div className="mb-3 text-center">
+      <p className="text-[10px] text-gray-600 mb-1.5 text-center">How am I feeling today?</p>
       <div className="flex space-x-1 justify-center">
         {moods.map((mood) => (
           <button
