@@ -11,6 +11,7 @@ interface TaskItemProps {
   stars: number;
   onToggleComplete: (id: string) => void;
   onSelect: () => void;
+  isSelected: boolean;
 }
 
 const categoryColors = {
@@ -30,11 +31,14 @@ const TaskItem: React.FC<TaskItemProps> = ({
   category, 
   stars,
   onToggleComplete,
-  onSelect 
+  onSelect,
+  isSelected
 }) => {
   return (
     <div 
-      className={`flex items-center p-2 rounded-md mb-1 ${categoryColors[category]} cursor-pointer hover:opacity-90`}
+      className={`flex items-center p-2 rounded-md mb-1 ${categoryColors[category]} cursor-pointer hover:opacity-90 ${
+        isSelected ? 'ring-2 ring-blue-500 shadow-lg scale-105' : ''
+      }`}
       onClick={onSelect}
     >
       <div className="mr-2" onClick={(e) => {
