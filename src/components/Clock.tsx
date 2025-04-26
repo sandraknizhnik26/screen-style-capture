@@ -13,10 +13,12 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) =
   const [currentTime, setCurrentTime] = useState(new Date());
   const [timeLeft, setTimeLeft] = useState(initialTimeLeft);
   const [isRunning, setIsRunning] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
   
   useEffect(() => {
     setTimeLeft(initialTimeLeft);
     setIsRunning(false); // Reset running state when new task is selected
+    setHasStarted(false); // Reset the started state when a new task is selected
   }, [initialTimeLeft]);
 
   useEffect(() => {
@@ -36,8 +38,8 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) =
     return () => clearInterval(intervalId);
   }, [isRunning]);
 
-  // Only calculate progress when running or time has elapsed while running
-  const progress = isRunning || timeLeft < initialTimeLeft 
+  // Only calculate progress when the timer has been started at least once
+  const progress = hasStarted 
     ? Math.min(100, Math.max(0, (timeLeft / totalTime) * 100))
     : 0;
   
@@ -51,11 +53,15 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) =
 
   const handlePlayPause = () => {
     setIsRunning(!isRunning);
+    if (!hasStarted) {
+      setHasStarted(true); // Mark that the timer has been started at least once
+    }
   };
 
   const handleReset = () => {
     setIsRunning(false);
     setTimeLeft(initialTimeLeft);
+    setHasStarted(false); // Reset the started state on manual reset
   };
 
   return (
@@ -109,7 +115,7 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) =
           {isRunning ? (
             <Pause className="h-6 w-6 text-yellow-500" />
           ) : (
-            <Play className={`h-6 w-6 ${timeLeft < initialTimeLeft ? 'text-green-500' : ''}`} />
+            <Play className={`h-6 w-6 ${hasStarted && !isRunning ? 'text-green-500' : ''}`} />
           )}
         </Button>
         <Button
