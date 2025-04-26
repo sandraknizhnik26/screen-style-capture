@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Settings, LogOut } from 'lucide-react';
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -198,10 +197,6 @@ const Index = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="text-2xl font-medium mb-2 text-center">
-                {format(currentTime, 'HH:mm')}
-              </div>
-
               <div className={`${isDarkMode ? 'bg-gray-700' : 'bg-white'} rounded-lg border ${isDarkMode ? 'border-gray-600' : 'border-gray-200'} p-3 shadow-sm transition-colors duration-200`}>
                 <Clock 
                   timeLeft={timeLeft || 0} 

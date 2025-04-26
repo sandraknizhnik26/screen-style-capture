@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Play, Pause, RotateCcw } from 'lucide-react';
 import { format } from 'date-fns';
