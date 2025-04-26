@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Moon, Sun } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
 
 interface ThemeToggleProps {
   isDarkMode: boolean;
@@ -10,20 +11,14 @@ interface ThemeToggleProps {
 const ThemeToggle: React.FC<ThemeToggleProps> = ({ isDarkMode, onToggle }) => {
   return (
     <div className="flex items-center space-x-1">
-      <Sun className="h-3 w-3 text-gray-600" />
-      <button
-        onClick={onToggle}
-        className={`relative inline-flex h-4 w-7 items-center rounded-full transition-colors ${
-          isDarkMode ? 'bg-cyan-600' : 'bg-gray-300'
-        }`}
-      >
-        <span
-          className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
-            isDarkMode ? 'translate-x-4' : 'translate-x-1'
-          }`}
-        />
-      </button>
-      <Moon className="h-3 w-3 text-gray-600" />
+      <Sun className={`h-3 w-3 ${isDarkMode ? 'text-gray-500' : 'text-yellow-500'}`} />
+      <Switch 
+        checked={isDarkMode} 
+        onCheckedChange={onToggle} 
+        className="data-[state=checked]:bg-gray-700 data-[state=unchecked]:bg-gray-300"
+        size="sm"
+      />
+      <Moon className={`h-3 w-3 ${isDarkMode ? 'text-blue-400' : 'text-gray-500'}`} />
     </div>
   );
 };
