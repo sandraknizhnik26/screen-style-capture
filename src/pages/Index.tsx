@@ -137,19 +137,7 @@ const Index = () => {
     document.documentElement.dir = newLanguage === 'he' ? 'rtl' : 'ltr';
   };
 
-  const SidebarHeader = (
-    <div className="flex flex-col items-center py-4 space-y-2">
-      <h2 className="text-sm font-medium text-gray-600">Quick Actions</h2>
-      <div className="flex space-x-2">
-        <button className="text-xs bg-gray-100 px-2 py-1 rounded hover:bg-gray-200">
-          Notifications
-        </button>
-        <button className="text-xs bg-gray-100 px-2 py-1 rounded hover:bg-gray-200">
-          Messages
-        </button>
-      </div>
-    </div>
-  );
+  const SidebarHeader = null;
 
   return (
     <SidebarProvider>
