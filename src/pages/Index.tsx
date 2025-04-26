@@ -134,6 +134,21 @@ const Index = () => {
     document.documentElement.dir = newLanguage === 'he' ? 'rtl' : 'ltr';
   };
 
+  // Optional header for sidebar
+  const SidebarHeader = (
+    <div className="flex flex-col items-center py-4 space-y-2">
+      <h2 className="text-sm font-medium text-gray-600">Quick Actions</h2>
+      <div className="flex space-x-2">
+        <button className="text-xs bg-gray-100 px-2 py-1 rounded hover:bg-gray-200">
+          Notifications
+        </button>
+        <button className="text-xs bg-gray-100 px-2 py-1 rounded hover:bg-gray-200">
+          Messages
+        </button>
+      </div>
+    </div>
+  );
+
   return (
     <SidebarProvider>
       <div className={`max-w-5xl mx-auto my-4 min-h-[calc(100vh-2rem)] flex w-full ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-gray-50 text-gray-900'} border border-gray-300 rounded-md overflow-hidden transition-colors duration-200`}>
@@ -141,7 +156,11 @@ const Index = () => {
           <div className="py-4">
             <Logo />
           </div>
-          <MainSidebar selectedMood={selectedMood} onMoodSelect={setSelectedMood} />
+          <MainSidebar 
+            selectedMood={selectedMood} 
+            onMoodSelect={setSelectedMood} 
+            headerContent={SidebarHeader}
+          />
         </div>
         
         <div className="flex-1 flex flex-col">

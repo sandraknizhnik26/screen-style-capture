@@ -12,12 +12,20 @@ import MoodSelector from './MoodSelector';
 interface MainSidebarProps {
   selectedMood: string | null;
   onMoodSelect: (mood: string) => void;
+  headerContent?: React.ReactNode;
 }
 
-const MainSidebar = ({ selectedMood, onMoodSelect }: MainSidebarProps) => {
+const MainSidebar = ({ selectedMood, onMoodSelect, headerContent }: MainSidebarProps) => {
   return (
     <Sidebar className="hidden md:flex">
       <SidebarContent>
+        {headerContent && (
+          <SidebarGroup>
+            <SidebarGroupContent>
+              {headerContent}
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
         <SidebarGroup>
           <SidebarGroupLabel>How am I feeling today?</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -43,3 +51,4 @@ const MainSidebar = ({ selectedMood, onMoodSelect }: MainSidebarProps) => {
 };
 
 export default MainSidebar;
+
