@@ -27,9 +27,10 @@ const Clock: React.FC<ClockProps> = ({ timeLeft, totalTime }) => {
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (progress / 100) * circumference;
   
-  // Convert timeLeft to hours and minutes
-  const hours = Math.floor(timeLeft / 3600);
-  const minutes = Math.floor((timeLeft % 3600) / 60);
+  // Convert timeLeft to minutes and seconds
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = Math.floor(timeLeft % 60);
+  const timeDisplay = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
   return (
     <div className="flex flex-col items-center justify-center w-full p-4">
@@ -68,10 +69,10 @@ const Clock: React.FC<ClockProps> = ({ timeLeft, totalTime }) => {
         {/* Time display in the center */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="text-6xl font-bold">
-            {hours > 0 ? `${hours}:${minutes.toString().padStart(2, '0')}` : minutes}
+            {timeDisplay}
           </span>
           <span className="text-sm opacity-60">
-            {hours > 0 ? 'hours left' : 'minutes left'}
+            minutes left
           </span>
         </div>
       </div>
@@ -80,4 +81,3 @@ const Clock: React.FC<ClockProps> = ({ timeLeft, totalTime }) => {
 };
 
 export default Clock;
-
