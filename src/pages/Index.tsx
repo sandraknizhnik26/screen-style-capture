@@ -10,6 +10,7 @@ import ProgressBar from '@/components/ProgressBar';
 import ThemeToggle from '@/components/ThemeToggle';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import MainSidebar from '@/components/MainSidebar';
+import { format } from 'date-fns';
 
 interface Task {
   id: string;
@@ -29,6 +30,7 @@ const Index = () => {
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [language, setLanguage] = useState<'en' | 'he'>('en');
+  const [currentTime, setCurrentTime] = useState(new Date());
 
   const [tasks, setTasks] = useState<Task[]>([
     { 
@@ -195,6 +197,10 @@ const Index = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="text-2xl font-medium mb-2 text-center">
+                {format(currentTime, 'HH:mm')}
+              </div>
+
               <div className={`${isDarkMode ? 'bg-gray-700' : 'bg-white'} rounded-lg border ${isDarkMode ? 'border-gray-600' : 'border-gray-200'} p-3 shadow-sm transition-colors duration-200`}>
                 <h2 className={`text-sm font-medium mb-2 ${isDarkMode ? 'text-gray-200' : ''} transition-colors duration-200`}>Current Task</h2>
                 <div className={`text-center text-xs mb-2 ${isDarkMode ? 'text-gray-300' : ''} transition-colors duration-200`}>

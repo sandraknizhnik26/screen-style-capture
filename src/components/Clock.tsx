@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Play, Pause, RotateCcw } from 'lucide-react';
-import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -18,8 +17,8 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) =
   
   useEffect(() => {
     setTimeLeft(initialTimeLeft);
-    setIsRunning(false); // Reset running state when new task is selected
-    setHasStarted(false); // Reset the started state when a new task is selected
+    setIsRunning(false);
+    setHasStarted(false);
   }, [initialTimeLeft]);
 
   useEffect(() => {
@@ -39,12 +38,10 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) =
     return () => clearInterval(intervalId);
   }, [isRunning]);
 
-  // Only calculate progress when the timer has been started at least once
   const progress = hasStarted 
     ? Math.min(100, Math.max(0, (timeLeft / totalTime) * 100))
     : 0;
   
-  // Adjust radius based on screen size
   const radius = isMobile ? 70 : 90;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - ((100 - progress) / 100) * circumference;
@@ -56,26 +53,21 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) =
   const handlePlayPause = () => {
     setIsRunning(!isRunning);
     if (!hasStarted) {
-      setHasStarted(true); // Mark that the timer has been started at least once
+      setHasStarted(true);
     }
   };
 
   const handleReset = () => {
     setIsRunning(false);
     setTimeLeft(initialTimeLeft);
-    setHasStarted(false); // Reset the started state on manual reset
+    setHasStarted(false);
   };
 
-  // Calculate size classes based on screen size
   const clockSize = isMobile ? "w-52 h-52" : "w-64 h-64";
   const timeTextSize = isMobile ? "text-4xl" : "text-6xl";
 
   return (
     <div className="flex flex-col items-center justify-center w-full p-4">
-      <div className="text-2xl font-medium mb-2">
-        {format(currentTime, 'HH:mm')}
-      </div>
-      
       <div className={`relative ${clockSize}`}>
         <svg className="w-full h-full transform -rotate-90" viewBox="0 0 200 200">
           <circle 
