@@ -1,6 +1,7 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { format } from 'date-fns';
 
 interface ClockProps {
   timeLeft: number;
@@ -8,13 +9,26 @@ interface ClockProps {
 }
 
 const Clock: React.FC<ClockProps> = ({ timeLeft }) => {
-  // Format the time as MM:SS
-  const minutes = Math.floor(timeLeft / 60);
-  const seconds = timeLeft % 60;
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  // Format the countdown time as MM:SS (timeLeft is in minutes)
+  const minutes = Math.floor(timeLeft);
+  const seconds = Math.round((timeLeft - minutes) * 60);
   const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full space-y-4">
+      <div className="text-2xl font-medium text-gray-600">
+        {format(currentTime, 'h:mm a')}
+      </div>
       <div className="text-4xl font-bold text-gray-800">
         {timeString}
       </div>

@@ -90,7 +90,7 @@ const Index = () => {
 
   const handleTaskSelect = (task: Task) => {
     setCurrentTask(task);
-    setTimeLeft(task.timeInSeconds || null);
+    setTimeLeft(task.timeInSeconds ? task.timeInSeconds / 60 : null);
   };
 
   const calculateProgress = () => {
@@ -188,6 +188,7 @@ const Index = () => {
                   {...task}
                   onToggleComplete={toggleTaskCompletion}
                   onSelect={() => handleTaskSelect(task)}
+                  isSelected={currentTask?.id === task.id}
                 />
               ))}
             </div>
