@@ -137,15 +137,17 @@ const Index = () => {
   return (
     <SidebarProvider>
       <div className={`max-w-5xl mx-auto my-4 min-h-[calc(100vh-2rem)] flex w-full ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-gray-50 text-gray-900'} border border-gray-300 rounded-md overflow-hidden transition-colors duration-200`}>
-        <MainSidebar selectedMood={selectedMood} onMoodSelect={setSelectedMood} />
+        <div className="hidden md:flex flex-col items-center w-40 border-r">
+          <div className="py-4">
+            <Logo />
+          </div>
+          <MainSidebar selectedMood={selectedMood} onMoodSelect={setSelectedMood} />
+        </div>
         
         <div className="flex-1 flex flex-col">
-          {/* Header with Logo and Settings */}
-          <div className="flex justify-between items-center p-4 border-b border-gray-200">
-            <div className="w-16 h-16 md:w-20 md:h-20">
-              <Logo />
-            </div>
-            <div className={`flex items-center ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-100'} rounded-lg border shadow-sm overflow-hidden transition-colors duration-200`}>
+          <div className="md:hidden flex flex-col items-center py-4">
+            <Logo />
+            <div className={`flex items-center ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-100'} rounded-lg border shadow-sm overflow-hidden mt-4 transition-colors duration-200`}>
               <button className={`flex items-center ${isDarkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-50'} px-3 py-1 text-xs transition-colors duration-200`}>
                 <Settings className="h-3 w-3 mr-1" />
                 Settings
@@ -159,15 +161,12 @@ const Index = () => {
           </div>
 
           <div className="flex-1 p-4">
-            {/* Greeting */}
             <h1 className="text-xl font-semibold text-center mb-6">Good morning, Roni</h1>
 
-            {/* Mood Selector - Only visible on mobile */}
             <div className="mb-6 md:hidden">
               <MoodSelector selectedMood={selectedMood} onMoodSelect={setSelectedMood} />
             </div>
 
-            {/* Action Buttons - Only visible on mobile */}
             <div className="flex justify-center gap-2 mb-6 md:hidden">
               <button className={`text-[10px] py-1 px-1.5 rounded mb-1 text-left ${isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'} transition-colors duration-200`}>
                 View recommendations
@@ -180,9 +179,7 @@ const Index = () => {
               </button>
             </div>
 
-            {/* Tasks Section */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Current Task with Clock */}
               <div className={`${isDarkMode ? 'bg-gray-700' : 'bg-white'} rounded-lg border ${isDarkMode ? 'border-gray-600' : 'border-gray-200'} p-3 shadow-sm transition-colors duration-200`}>
                 <h2 className={`text-sm font-medium mb-2 ${isDarkMode ? 'text-gray-200' : ''} transition-colors duration-200`}>Current Task</h2>
                 <div className={`text-center text-xs mb-2 ${isDarkMode ? 'text-gray-300' : ''} transition-colors duration-200`}>
@@ -191,7 +188,6 @@ const Index = () => {
                 <Clock timeLeft={timeLeft || 0} totalTime={totalTime} />
               </div>
 
-              {/* Task List */}
               <div className="flex flex-col">
                 <div className="flex justify-between items-center mb-3">
                   <h2 className={`text-sm font-medium ${isDarkMode ? 'text-gray-200' : ''} transition-colors duration-200`}>Task</h2>
@@ -212,7 +208,6 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Footer with Controls and Progress */}
           <div className={`flex items-center justify-between p-4 border-t ${isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200'} transition-colors duration-200`}>
             <div className="flex items-center gap-4">
               <LanguageSwitcher currentLanguage={language} onLanguageChange={handleLanguageChange} />

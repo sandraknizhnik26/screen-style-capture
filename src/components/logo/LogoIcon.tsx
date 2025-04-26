@@ -1,17 +1,21 @@
 
 import React from 'react';
 
-const LogoIcon: React.FC = () => {
+interface LogoIconProps {
+  className?: string;
+}
+
+const LogoIcon: React.FC<LogoIconProps> = ({ className = "h-32 w-32" }) => {
   return (
-    <div className="h-32 w-32 relative"> {/* Increased size from h-20 w-20 to h-32 w-32 */}
+    <div className={`relative ${className}`}>
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="h-32 w-32 bg-transparent rounded-full"></div>
+        <div className="bg-transparent rounded-full w-full h-full"></div>
       </div>
       <div className="absolute inset-0 flex items-center justify-center">
         <img 
           src="/lovable-uploads/412115c6-52a0-40f1-b632-7e11d31436e2.png" 
           alt="BrainBridge Logo" 
-          className="h-32 w-32 object-contain" 
+          className="w-full h-full object-contain" 
         />
       </div>
     </div>
