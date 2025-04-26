@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   SidebarContent,
@@ -45,6 +44,7 @@ const MainSidebar = ({
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
+          <SidebarGroupLabel>How am I feeling today?</SidebarGroupLabel>
           <SidebarGroupContent>
             <MoodSelector selectedMood={selectedMood} onMoodSelect={onMoodSelect} />
           </SidebarGroupContent>
