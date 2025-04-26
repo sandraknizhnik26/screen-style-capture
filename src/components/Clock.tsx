@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Play, RotateCcw } from 'lucide-react';
 import { format } from 'date-fns';
@@ -68,7 +69,7 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) =
             fill="none" 
             stroke="currentColor"
             strokeWidth="4"
-            className="opacity-10"
+            className="text-gray-200 opacity-30"
           />
           <circle 
             cx="100" 
@@ -80,7 +81,7 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) =
             strokeLinecap="round"
             strokeDasharray={circumference}
             strokeDashoffset={strokeDashoffset}
-            className="transition-all duration-500 text-purple-500"
+            className="text-gray-500 transition-all duration-500"
           />
         </svg>
         
