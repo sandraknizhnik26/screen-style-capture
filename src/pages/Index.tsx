@@ -57,16 +57,6 @@ const Index = () => {
       timeInSeconds: 1800
     },
     { 
-      id: "4", 
-      title: "Enjoy a healthy snack and hydrate", 
-      timeEstimation: "(10 minutes)", 
-      completed: false, 
-      category: 'orange',
-      stars: 1,
-      starValue: 10,
-      timeInSeconds: 600
-    },
-    { 
       id: "5", 
       title: "Watch a fun educational video related to this week's science topic", 
       timeEstimation: "(15 minutes)", 
