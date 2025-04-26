@@ -1,4 +1,6 @@
+
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   SidebarContent,
   SidebarGroup,
@@ -51,9 +53,9 @@ const MainSidebar = ({
         </SidebarGroup>
         <SidebarGroup>
           <SidebarGroupContent className="flex flex-col gap-2 items-center">
-            <button className="text-[10px] py-1 px-1.5 rounded mb-1 text-center bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200 w-48">
+            <Link to="/recommendations" className="text-[10px] py-1 px-1.5 rounded mb-1 text-center bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200 w-48">
               View recommendations
-            </button>
+            </Link>
             <button className="text-[10px] py-1 px-1.5 rounded mb-1 text-center bg-cyan-500 text-white hover:bg-cyan-600 transition-colors duration-200 w-48">
               Do a new assessment
             </button>

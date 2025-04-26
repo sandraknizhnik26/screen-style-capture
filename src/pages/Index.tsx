@@ -12,6 +12,7 @@ import ThemeToggle from '@/components/ThemeToggle';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import MainSidebar from '@/components/MainSidebar';
 import { format } from 'date-fns';
+import { Link } from 'react-router-dom';
 
 interface Task {
   id: string;
@@ -201,9 +202,9 @@ const Index = () => {
             </div>
 
             <div className="flex justify-center gap-2 mb-6 md:hidden">
-              <button className={`text-[10px] py-1 px-1.5 rounded mb-1 text-left ${isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'} transition-colors duration-200`}>
+              <Link to="/recommendations" className={`text-[10px] py-1 px-1.5 rounded mb-1 text-left ${isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'} transition-colors duration-200`}>
                 View recommendations
-              </button>
+              </Link>
               <button className="text-[10px] py-1 px-1.5 rounded mb-1 text-left bg-cyan-500 text-white hover:bg-cyan-600 transition-colors duration-200">
                 Do a new assessment
               </button>
