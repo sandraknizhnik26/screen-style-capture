@@ -15,7 +15,7 @@ interface ClockProps {
 
 /**
  * Clock Component
- * Displays the current time and a countdown timer for tasks
+ * Displays the current time in 24-hour format and a countdown timer for tasks
  * Also includes a decorative Lottie animation
  * 
  * @param timeLeft - Time remaining for current task (in seconds)
@@ -42,9 +42,9 @@ const Clock: React.FC<ClockProps> = ({ timeLeft }) => {
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full space-y-4">
-      {/* Display current time in 12-hour format (e.g., 3:45 PM) */}
+      {/* Display current time in 24-hour format (e.g., 15:45) */}
       <div className="text-2xl font-medium text-gray-600">
-        {format(currentTime, 'h:mm a')}
+        {format(currentTime, 'HH:mm')}
       </div>
 
       {/* Display remaining minutes for the current task */}
@@ -65,4 +65,3 @@ const Clock: React.FC<ClockProps> = ({ timeLeft }) => {
 };
 
 export default Clock;
-
