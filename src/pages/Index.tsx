@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Settings, LogOut } from 'lucide-react';
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -163,6 +162,20 @@ const Index = () => {
         </div>
         
         <div className="flex-1 max-w-5xl mx-auto p-4 w-full">
+          <div className="hidden md:flex justify-end mb-4">
+            <div className={`flex items-center ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-100'} rounded-lg border shadow-sm overflow-hidden transition-colors duration-200`}>
+              <button className={`flex items-center ${isDarkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-50'} px-3 py-1 text-xs transition-colors duration-200`}>
+                <Settings className="h-3 w-3 mr-1" />
+                Settings
+              </button>
+              <div className={`h-4 border-r ${isDarkMode ? 'border-gray-600' : 'border-gray-200'} transition-colors duration-200`}></div>
+              <button className={`flex items-center ${isDarkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-50'} px-3 py-1 text-xs transition-colors duration-200`}>
+                <LogOut className="h-3 w-3 mr-1" />
+                Log out
+              </button>
+            </div>
+          </div>
+
           <div className="md:hidden flex flex-col items-center py-4">
             <Logo />
             <div className={`flex items-center ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-100'} rounded-lg border shadow-sm overflow-hidden mt-4 transition-colors duration-200`}>
