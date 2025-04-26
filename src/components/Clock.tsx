@@ -80,7 +80,7 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime, cur
   const timeTextSize = isMobile ? "text-4xl" : "text-5xl";
 
   return (
-    <div className="flex flex-col items-center justify-center w-full py-0">
+    <div className="flex flex-col items-center justify-center w-full py-0 pb-0">
       <div className="text-xl font-medium mb-1">
         {format(currentTime, 'HH:mm')}
       </div>
@@ -90,42 +90,44 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime, cur
         {currentTask ? currentTask.title : "No task selected"}
       </div>
 
-      <div className={`relative ${clockSize}`}>
-        <svg className="w-full h-full transform -rotate-90" viewBox="0 0 200 200">
-          <circle 
-            cx="100" 
-            cy="100" 
-            r={radius} 
-            fill="none" 
-            stroke="currentColor"
-            strokeWidth="4"
-            className="text-gray-200 opacity-30"
-          />
-          <circle 
-            cx="100" 
-            cy="100" 
-            r={radius} 
-            fill="none" 
-            stroke="currentColor"
-            strokeWidth="4"
-            strokeLinecap="round"
-            strokeDasharray={circumference}
-            strokeDashoffset={strokeDashoffset}
-            className="text-gray-500 transition-all duration-500"
-          />
-        </svg>
-        
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className={`font-bold ${timeTextSize}`}>
-            {timeDisplay}
-          </span>
-          <span className="text-xs opacity-60">
-            minutes left
-          </span>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
+        <div className="relative">
+          <svg className="w-full h-full transform -rotate-90" viewBox="0 0 200 200">
+            <circle 
+              cx="100" 
+              cy="100" 
+              r={radius} 
+              fill="none" 
+              stroke="currentColor"
+              strokeWidth="4"
+              className="text-gray-200 opacity-30"
+            />
+            <circle 
+              cx="100" 
+              cy="100" 
+              r={radius} 
+              fill="none" 
+              stroke="currentColor"
+              strokeWidth="4"
+              strokeLinecap="round"
+              strokeDasharray={circumference}
+              strokeDashoffset={strokeDashoffset}
+              className="text-gray-500 transition-all duration-500"
+            />
+          </svg>
+          
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <span className={`font-bold ${timeTextSize}`}>
+              {timeDisplay}
+            </span>
+            <span className="text-xs opacity-60">
+              minutes left
+            </span>
+          </div>
         </div>
       </div>
 
-      <div className="flex gap-2 mt-0">
+      <div className="flex gap-2">
         <Button
           variant="outline"
           size="icon"
