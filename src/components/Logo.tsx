@@ -1,13 +1,11 @@
 
 import React from 'react';
 import LogoIcon from './logo/LogoIcon';
-import LogoText from './logo/LogoText';
 
 const Logo: React.FC = () => {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex items-center justify-center">
       <LogoIcon />
-      <LogoText />
     </div>
   );
 };
