@@ -8,7 +8,7 @@ interface TaskItemProps {
   timeEstimation: string;
   completed: boolean;
   category: 'red' | 'green' | 'orange' | 'blue' | 'yellow' | 'purple';
-  stars?: number;
+  stars: number;
   onToggleComplete: (id: string) => void;
 }
 
@@ -27,7 +27,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
   timeEstimation, 
   completed, 
   category, 
-  stars = 0,
+  stars,
   onToggleComplete 
 }) => {
   return (

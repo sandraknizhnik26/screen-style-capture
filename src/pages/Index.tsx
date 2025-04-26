@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Settings, LogOut, QrCode, FileText } from 'lucide-react';
 
@@ -14,7 +15,8 @@ interface Task {
   timeEstimation: string;
   completed: boolean;
   category: 'red' | 'green' | 'orange' | 'blue' | 'yellow' | 'purple';
-  stars?: number;
+  stars: number;
+  starValue: number;
 }
 
 const Index = () => {
@@ -30,14 +32,17 @@ const Index = () => {
       timeEstimation: "(45 minutes)", 
       completed: false, 
       category: 'red',
-      stars: 1
+      stars: 1,
+      starValue: 10
     },
     { 
       id: "2", 
       title: "Read & summarize a chapter from the book you are reading", 
       timeEstimation: "(20 minutes)", 
       completed: true, 
-      category: 'green' 
+      category: 'green',
+      stars: 2,
+      starValue: 15
     },
     { 
       id: "3", 
@@ -45,21 +50,26 @@ const Index = () => {
       timeEstimation: "", 
       completed: false, 
       category: 'orange',
-      stars: 2
+      stars: 2,
+      starValue: 15
     },
     { 
       id: "4", 
       title: "Enjoy a healthy snack and hydrate", 
       timeEstimation: "(10 minutes)", 
       completed: false, 
-      category: 'orange' 
+      category: 'orange',
+      stars: 1,
+      starValue: 10
     },
     { 
       id: "5", 
       title: "Watch a fun educational video related to this week's science topic", 
       timeEstimation: "(15 minutes)", 
       completed: false, 
-      category: 'yellow' 
+      category: 'yellow',
+      stars: 3,
+      starValue: 20
     },
     { 
       id: "6", 
@@ -67,14 +77,18 @@ const Index = () => {
       timeEstimation: "(10 minutes)", 
       completed: false, 
       category: 'purple',
-      stars: 2
+      stars: 4,
+      starValue: 30
     },
   ]);
 
   const calculateProgress = () => {
-    const totalTasks = tasks.length;
-    const completedTasks = tasks.filter(task => task.completed).length;
-    return Math.floor((completedTasks / totalTasks) * 100);
+    const totalStarValue = tasks.reduce((sum, task) => sum + task.starValue, 0);
+    const completedStarValue = tasks
+      .filter(task => task.completed)
+      .reduce((sum, task) => sum + task.starValue, 0);
+    
+    return Math.floor((completedStarValue / totalStarValue) * 100);
   };
 
   const toggleTaskCompletion = (taskId: string) => {
