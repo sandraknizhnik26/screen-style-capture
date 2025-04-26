@@ -1,15 +1,28 @@
+
 import React, { useEffect, useState } from 'react';
 import { Play, Pause, RotateCcw } from 'lucide-react';
 import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 
+interface Task {
+  id: string;
+  title: string;
+  timeEstimation: string;
+  completed: boolean;
+  category: 'red' | 'green' | 'orange' | 'blue' | 'yellow' | 'purple';
+  stars: number;
+  starValue: number;
+  timeInSeconds?: number;
+}
+
 interface ClockProps {
   timeLeft: number;
   totalTime: number;
+  currentTask: Task | null;
 }
 
-const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) => {
+const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime, currentTask }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [timeLeft, setTimeLeft] = useState(initialTimeLeft);
   const [isRunning, setIsRunning] = useState(false);

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Settings, LogOut } from 'lucide-react';
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -202,7 +203,11 @@ const Index = () => {
               </div>
 
               <div className={`${isDarkMode ? 'bg-gray-700' : 'bg-white'} rounded-lg border ${isDarkMode ? 'border-gray-600' : 'border-gray-200'} p-3 shadow-sm transition-colors duration-200`}>
-                <Clock timeLeft={timeLeft || 0} totalTime={totalTime} />
+                <Clock 
+                  timeLeft={timeLeft || 0} 
+                  totalTime={totalTime} 
+                  currentTask={currentTask} 
+                />
               </div>
 
               <div className="flex flex-col md:flex-row gap-6">
