@@ -1,11 +1,10 @@
-
 import React, { useEffect, useState } from 'react';
 import { Play, Pause, RotateCcw } from 'lucide-react';
 import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-export interface Task {
+interface Task {
   id: string;
   title: string;
   timeEstimation: string;
@@ -16,7 +15,7 @@ export interface Task {
   timeInSeconds?: number;
 }
 
-export interface ClockProps {
+interface ClockProps {
   timeLeft: number;
   totalTime: number;
   currentTask: Task | null;
