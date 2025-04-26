@@ -55,7 +55,7 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime, cur
     ? Math.min(100, Math.max(0, (timeLeft / totalTime) * 100))
     : 0;
   
-  const radius = isMobile ? 70 : 90;
+  const radius = isMobile ? 70 : 70;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - ((100 - progress) / 100) * circumference;
   
@@ -76,8 +76,8 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime, cur
     setHasStarted(false);
   };
 
-  const clockSize = isMobile ? "w-52 h-52" : "w-64 h-64";
-  const timeTextSize = isMobile ? "text-4xl" : "text-6xl";
+  const clockSize = isMobile ? "w-52 h-52" : "w-52 h-52";
+  const timeTextSize = isMobile ? "text-4xl" : "text-5xl";
 
   return (
     <div className="flex flex-col items-center justify-center w-full p-2">
