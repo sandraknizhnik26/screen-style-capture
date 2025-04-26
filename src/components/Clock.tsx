@@ -29,8 +29,8 @@ const Clock: React.FC<ClockProps> = ({ timeLeft }) => {
       <div className="text-2xl font-medium text-gray-600">
         {format(currentTime, 'h:mm a')}
       </div>
-      <div className="text-4xl font-bold text-gray-800">
-        {timeString}
+      <div className="text-5xl font-bold text-gray-800">
+        {minutes}
       </div>
       <div className="relative w-72 h-72 flex items-center justify-center">
         <DotLottieReact
