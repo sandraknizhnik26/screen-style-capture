@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Settings, LogOut, QrCode, FileText } from 'lucide-react';
+import { Settings, LogOut } from 'lucide-react';
 
 import Logo from '@/components/Logo';
 import Clock from '@/components/Clock';
@@ -136,7 +136,7 @@ const Index = () => {
     <div className={`max-w-5xl mx-auto my-4 min-h-[calc(100vh-2rem)] flex flex-col ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-gray-50 text-gray-900'} border border-gray-300 rounded-md overflow-hidden transition-colors duration-200`}>
       {/* Header with Logo and Settings */}
       <div className="flex justify-between items-center p-4 border-b border-gray-200">
-        <div className="w-20 h-20">
+        <div className="w-16 h-16 md:w-20 md:h-20">
           <Logo />
         </div>
         <div className={`flex items-center ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-100'} rounded-lg border shadow-sm overflow-hidden transition-colors duration-200`}>
@@ -175,7 +175,7 @@ const Index = () => {
         </div>
 
         {/* Tasks Section */}
-        <div className="grid grid-cols-1 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Current Task with Clock */}
           <div className={`${isDarkMode ? 'bg-gray-700' : 'bg-white'} rounded-lg border ${isDarkMode ? 'border-gray-600' : 'border-gray-200'} p-3 shadow-sm transition-colors duration-200`}>
             <h2 className={`text-sm font-medium mb-2 ${isDarkMode ? 'text-gray-200' : ''} transition-colors duration-200`}>Current Task</h2>
