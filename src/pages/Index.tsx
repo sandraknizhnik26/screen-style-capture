@@ -7,6 +7,7 @@ import TaskItem from '@/components/TaskItem';
 import MoodSelector from '@/components/MoodSelector';
 import ProgressBar from '@/components/ProgressBar';
 import ThemeToggle from '@/components/ThemeToggle';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 interface Task {
   id: string;
@@ -25,6 +26,7 @@ const Index = () => {
   const [totalTime] = useState(1800);
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [language, setLanguage] = useState<'en' | 'he'>('en');
 
   const [tasks, setTasks] = useState<Task[]>([
     { 
@@ -125,6 +127,11 @@ const Index = () => {
     }
   };
 
+  const handleLanguageChange = (newLanguage: 'en' | 'he') => {
+    setLanguage(newLanguage);
+    document.documentElement.dir = newLanguage === 'he' ? 'rtl' : 'ltr';
+  };
+
   return (
     <div className={`max-w-5xl mx-auto my-4 min-h-[calc(100vh-2rem)] flex ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-gray-50 text-gray-900'} border border-gray-300 rounded-md overflow-hidden transition-colors duration-200`}>
       <div className={`w-32 ${isDarkMode ? 'bg-gray-900' : 'bg-slate-50'} p-3 border-r ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} flex flex-col transition-colors duration-200`}>
@@ -137,23 +144,26 @@ const Index = () => {
           
           <div className="space-y-2">
             <button className={`w-full text-[10px] py-1 px-1.5 rounded mb-1 text-left ${isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'} transition-colors duration-200`}>
-              View recommendations
+              {language === 'en' ? 'View recommendations' : 'צפה בהמלצות'}
             </button>
             <button className="w-full text-[10px] py-1 px-1.5 rounded mb-1 text-left bg-cyan-500 text-white hover:bg-cyan-600 transition-colors duration-200">
-              Do a new assessment
+              {language === 'en' ? 'Do a new assessment' : 'בצע הערכה חדשה'}
             </button>
             <button className={`w-full text-[10px] py-1 px-1.5 rounded mb-1 text-left ${isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'} transition-colors duration-200`}>
-              My assessments
+              {language === 'en' ? 'My assessments' : 'ההערכות שלי'}
             </button>
           </div>
         </div>
         
         <div className={`mt-auto pt-3 border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} transition-colors duration-200`}>
           <div className="flex items-center justify-between mb-3">
-            <span className={`text-[10px] ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-200`}>Help/ support</span>
+            <span className={`text-[10px] ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-200`}>
+              {language === 'en' ? 'Help/ support' : 'עזרה ותמיכה'}
+            </span>
             <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleDarkMode} />
           </div>
           <div className="flex justify-between">
+            <LanguageSwitcher currentLanguage={language} onLanguageChange={handleLanguageChange} />
             <button className={`p-1 border ${isDarkMode ? 'border-gray-700' : 'border-gray-300'} rounded-sm transition-colors duration-200`}>
               <QrCode className={`h-3 w-3 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-200`} />
             </button>

@@ -16,7 +16,6 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ isDarkMode, onToggle }) => {
         checked={isDarkMode} 
         onCheckedChange={onToggle} 
         className="data-[state=checked]:bg-gray-700 data-[state=unchecked]:bg-gray-300"
-        size="sm"
       />
       <Moon className={`h-3 w-3 ${isDarkMode ? 'text-blue-400' : 'text-gray-500'}`} />
     </div>
