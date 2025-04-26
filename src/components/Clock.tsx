@@ -1,64 +1,68 @@
 
 import React, { useEffect, useState } from 'react';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import { format } from 'date-fns';
+import { Circle } from 'lucide-react';
 
-/**
- * Interface defining the props for the Clock component
- * @property timeLeft - Remaining time in seconds for the current task
- * @property totalTime - Total allocated time for the task in seconds
- */
 interface ClockProps {
   timeLeft: number;
   totalTime: number;
 }
 
-/**
- * Clock Component
- * Displays the current time in 24-hour format and a countdown timer for tasks
- * Also includes a decorative Lottie animation
- * 
- * @param timeLeft - Time remaining for current task (in seconds)
- * @param totalTime - Total time allocated for the task (in seconds)
- */
-const Clock: React.FC<ClockProps> = ({ timeLeft }) => {
-  // State to track the current time
+const Clock: React.FC<ClockProps> = ({ timeLeft, totalTime }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
-
-  // Effect to update the current time every second
+  
+  // Update current time every second
   useEffect(() => {
-    // Create an interval that updates currentTime every second
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
-
-    // Cleanup function to clear the interval when component unmounts
     return () => clearInterval(timer);
   }, []);
 
-  // Calculate minutes from timeLeft (in seconds)
-  // We use Math.ceil to round up - e.g., 59 seconds will show as 1 minute
+  // Calculate progress percentage (from 0 to 100)
+  const progress = Math.min(100, Math.max(0, (timeLeft / totalTime) * 100));
+  
+  // Calculate the SVG path for the progress arc
+  const radius = 90;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (progress / 100) * circumference;
+  
+  // Convert timeLeft to minutes
   const minutes = Math.ceil(timeLeft / 60);
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full space-y-4">
-      {/* Display current time in 24-hour format (e.g., 15:45) */}
-      <div className="text-2xl font-medium text-gray-600">
-        {format(currentTime, 'HH:mm')}
-      </div>
-
-      {/* Display remaining minutes for the current task */}
-      <div className="text-5xl font-bold text-gray-800">
-        {minutes}
-      </div>
-
-      {/* Decorative clock animation using Lottie */}
-      <div className="relative w-72 h-72 flex items-center justify-center">
-        <DotLottieReact
-          src="https://lottie.host/c4a2f9f8-7c5c-4c4c-93f4-6ad9c8e145c1/2uF7XeIxpb.lottie"
-          loop
-          autoplay
-        />
+    <div className="flex flex-col items-center justify-center w-full p-4">
+      <div className="relative w-64 h-64">
+        {/* Background circle */}
+        <svg className="w-full h-full transform -rotate-90" viewBox="0 0 200 200">
+          <circle 
+            cx="100" 
+            cy="100" 
+            r={radius} 
+            fill="none" 
+            stroke={`currentColor`}
+            strokeWidth="4"
+            className="opacity-10"
+          />
+          {/* Progress circle */}
+          <circle 
+            cx="100" 
+            cy="100" 
+            r={radius} 
+            fill="none" 
+            stroke="currentColor"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeDasharray={circumference}
+            strokeDashoffset={strokeDashoffset}
+            className="transition-all duration-500 text-purple-500"
+          />
+        </svg>
+        
+        {/* Time display in the center */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <span className="text-6xl font-bold">{minutes}</span>
+          <span className="text-sm opacity-60">minutes left</span>
+        </div>
       </div>
     </div>
   );
