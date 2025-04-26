@@ -192,7 +192,7 @@ const Index = () => {
           </div>
 
           <div className="flex-1 flex flex-col h-full">
-            <h1 className="text-xl font-semibold text-center mb-6">Good morning, Roni</h1>
+            <h1 className="text-xl font-semibold text-center mb-4">Good morning, Roni</h1>
 
             <div className="mb-6 md:hidden">
               <MoodSelector selectedMood={selectedMood} onMoodSelect={setSelectedMood} />
@@ -210,8 +210,8 @@ const Index = () => {
               </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
-              <div className={`${isDarkMode ? 'bg-gray-700' : 'bg-white'} rounded-lg border ${isDarkMode ? 'border-gray-600' : 'border-gray-200'} p-3 shadow-sm transition-colors duration-200`}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
+              <div className={`${isDarkMode ? 'bg-gray-700' : 'bg-white'} rounded-lg border ${isDarkMode ? 'border-gray-600' : 'border-gray-200'} p-2 shadow-sm transition-colors duration-200`}>
                 <Clock 
                   timeLeft={timeLeft || 0} 
                   totalTime={totalTime} 
@@ -220,7 +220,6 @@ const Index = () => {
               </div>
 
               <div className="flex flex-col md:flex-row gap-6">
-                {/* Progress bar for mobile */}
                 <div className="md:hidden w-full h-6">
                   <ProgressBar progress={calculateProgress()} />
                 </div>
@@ -243,7 +242,6 @@ const Index = () => {
                   </div>
                 </div>
                 
-                {/* Progress bar for desktop */}
                 <div className="hidden md:block h-full">
                   <ProgressBar progress={calculateProgress()} />
                 </div>
