@@ -1,5 +1,6 @@
+
 import React, { useEffect, useState } from 'react';
-import { Play, RotateCcw } from 'lucide-react';
+import { Play, Pause, RotateCcw } from 'lucide-react';
 import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 
@@ -15,6 +16,7 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) =
   
   useEffect(() => {
     setTimeLeft(initialTimeLeft);
+    setIsRunning(false); // Reset running state when new task is selected
   }, [initialTimeLeft]);
 
   useEffect(() => {
@@ -34,7 +36,10 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) =
     return () => clearInterval(intervalId);
   }, [isRunning]);
 
-  const progress = Math.min(100, Math.max(0, (timeLeft / totalTime) * 100));
+  // Only calculate progress when running or time has elapsed while running
+  const progress = isRunning || timeLeft < initialTimeLeft 
+    ? Math.min(100, Math.max(0, (timeLeft / totalTime) * 100))
+    : 0;
   
   const radius = 90;
   const circumference = 2 * Math.PI * radius;
@@ -101,7 +106,11 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) =
           onClick={handlePlayPause}
           className="w-12 h-12"
         >
-          <Play className={`h-6 w-6 ${isRunning ? 'text-green-500' : ''}`} />
+          {isRunning ? (
+            <Pause className="h-6 w-6 text-yellow-500" />
+          ) : (
+            <Play className={`h-6 w-6 ${timeLeft < initialTimeLeft ? 'text-green-500' : ''}`} />
+          )}
         </Button>
         <Button
           variant="outline"
