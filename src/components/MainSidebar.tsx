@@ -8,6 +8,7 @@ import {
   SidebarGroupLabel,
 } from "@/components/ui/sidebar";
 import MoodSelector from './MoodSelector';
+import Logo from './Logo';
 
 interface MainSidebarProps {
   selectedMood: string | null;
@@ -19,13 +20,16 @@ const MainSidebar = ({ selectedMood, onMoodSelect, headerContent }: MainSidebarP
   return (
     <Sidebar className="hidden md:flex">
       <SidebarContent>
-        {headerContent && (
-          <SidebarGroup>
-            <SidebarGroupContent>
-              {headerContent}
-            </SidebarGroupContent>
-          </SidebarGroup>
-        )}
+        <SidebarGroup>
+          <SidebarGroupContent className="flex flex-col items-center py-4">
+            <Logo />
+            {headerContent && (
+              <div className="mt-4 w-full">
+                {headerContent}
+              </div>
+            )}
+          </SidebarGroupContent>
+        </SidebarGroup>
         <SidebarGroup>
           <SidebarGroupLabel>How am I feeling today?</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -51,4 +55,3 @@ const MainSidebar = ({ selectedMood, onMoodSelect, headerContent }: MainSidebarP
 };
 
 export default MainSidebar;
-

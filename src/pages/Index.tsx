@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Settings, LogOut } from 'lucide-react';
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -152,10 +151,7 @@ const Index = () => {
   return (
     <SidebarProvider>
       <div className={`max-w-5xl mx-auto my-4 min-h-[calc(100vh-2rem)] flex w-full ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-gray-50 text-gray-900'} border border-gray-300 rounded-md overflow-hidden transition-colors duration-200`}>
-        <div className="hidden md:flex flex-col items-center w-40 border-r relative">
-          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
-            <Logo />
-          </div>
+        <div className="hidden md:flex flex-col items-center w-40 border-r">
           <MainSidebar 
             selectedMood={selectedMood} 
             onMoodSelect={setSelectedMood} 
@@ -249,4 +245,3 @@ const Index = () => {
 };
 
 export default Index;
-
