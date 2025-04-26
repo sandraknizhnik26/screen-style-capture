@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Settings, LogOut } from 'lucide-react';
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 import Logo from '@/components/Logo';
 import Clock from '@/components/Clock';
@@ -167,7 +168,11 @@ const Index = () => {
         
         <div className="flex-1 max-w-5xl mx-auto p-4 w-full">
           <div className="hidden md:flex justify-end mb-4">
-            <div className={`flex items-center ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-100'} rounded-lg border shadow-sm overflow-hidden transition-colors duration-200`}>
+            <div className={`flex items-center gap-2 ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-100'} rounded-lg border shadow-sm overflow-hidden transition-colors duration-200`}>
+              <Avatar className="h-7 w-7 ml-2">
+                <AvatarImage src="https://images.unsplash.com/photo-1501286353178-1ec881214838" />
+                <AvatarFallback>RS</AvatarFallback>
+              </Avatar>
               <button className={`flex items-center ${isDarkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-50'} px-3 py-1 text-xs transition-colors duration-200`}>
                 <Settings className="h-3 w-3 mr-1" />
                 Settings
@@ -182,7 +187,11 @@ const Index = () => {
 
           <div className="md:hidden flex flex-col items-center py-4">
             <Logo />
-            <div className={`flex items-center ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-100'} rounded-lg border shadow-sm overflow-hidden mt-4 transition-colors duration-200`}>
+            <div className={`flex items-center gap-2 ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-100'} rounded-lg border shadow-sm overflow-hidden mt-4 transition-colors duration-200`}>
+              <Avatar className="h-7 w-7 ml-2">
+                <AvatarImage src="https://images.unsplash.com/photo-1501286353178-1ec881214838" />
+                <AvatarFallback>RS</AvatarFallback>
+              </Avatar>
               <button className={`flex items-center ${isDarkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-50'} px-3 py-1 text-xs transition-colors duration-200`}>
                 <Settings className="h-3 w-3 mr-1" />
                 Settings
