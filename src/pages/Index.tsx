@@ -196,6 +196,7 @@ const Index = () => {
             <h1 className="text-xl font-semibold text-center mb-6">Good morning, Roni</h1>
 
             <div className="mb-6 md:hidden">
+              <div className="text-center mb-2 text-sm font-medium">How am I feeling today?</div>
               <MoodSelector selectedMood={selectedMood} onMoodSelect={setSelectedMood} />
             </div>
 

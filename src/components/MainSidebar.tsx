@@ -44,7 +44,7 @@ const MainSidebar = ({
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-center">How am I feeling today?</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-center w-full">How am I feeling today?</SidebarGroupLabel>
           <SidebarGroupContent>
             <MoodSelector selectedMood={selectedMood} onMoodSelect={onMoodSelect} />
           </SidebarGroupContent>
