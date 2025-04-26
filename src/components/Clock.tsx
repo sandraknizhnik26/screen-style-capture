@@ -1,4 +1,6 @@
+
 import React, { useState, useEffect } from 'react';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 interface ClockProps {
   timeLeft: number; // in seconds
@@ -9,12 +11,14 @@ const Clock: React.FC<ClockProps> = ({ timeLeft, totalTime }) => {
   const [minutes, setMinutes] = useState(Math.floor(timeLeft / 60));
   const [seconds, setSeconds] = useState(timeLeft % 60);
   const [isRunning, setIsRunning] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
   
   useEffect(() => {
     setMinutes(Math.floor(timeLeft / 60));
     setSeconds(timeLeft % 60);
     if (timeLeft > 0) {
       setIsRunning(true);
+      setIsComplete(false);
     }
   }, [timeLeft]);
 
@@ -30,6 +34,7 @@ const Clock: React.FC<ClockProps> = ({ timeLeft, totalTime }) => {
           setSeconds(59);
         } else {
           setIsRunning(false);
+          setIsComplete(true);
         }
       }, 1000);
     }
@@ -43,36 +48,50 @@ const Clock: React.FC<ClockProps> = ({ timeLeft, totalTime }) => {
 
   return (
     <div className="relative w-28 h-28 mx-auto">
-      <div className="absolute inset-0 rounded-full border-2 border-gray-800">
-        <svg className="w-full h-full transform -rotate-90">
-          <circle
-            cx="56"
-            cy="56"
-            r="54"
-            fill="none"
-            stroke="#f3f4f6"
-            strokeWidth="2"
-            className="w-full h-full"
-          />
-          <circle
-            cx="56"
-            cy="56"
-            r="54"
-            fill="none"
-            stroke="#1a1f2c"
-            strokeWidth="2"
-            strokeDasharray={`${2 * Math.PI * 54}`}
-            strokeDashoffset={`${2 * Math.PI * 54 * (1 - timeLeft / totalTime)}`}
-            className="transition-all duration-1000"
-          />
-        </svg>
-      </div>
-      
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="text-xl font-medium text-gray-800">
-          {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
+      {isComplete ? (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-full h-full">
+            <DotLottieReact
+              src="https://lottie.host/c4a2f9f8-7c5c-4c4c-93f4-6ad9c8e145c1/2uF7XeIxpb.lottie"
+              loop
+              autoplay
+            />
+          </div>
         </div>
-      </div>
+      ) : (
+        <>
+          <div className="absolute inset-0 rounded-full border-2 border-gray-800">
+            <svg className="w-full h-full transform -rotate-90">
+              <circle
+                cx="56"
+                cy="56"
+                r="54"
+                fill="none"
+                stroke="#f3f4f6"
+                strokeWidth="2"
+                className="w-full h-full"
+              />
+              <circle
+                cx="56"
+                cy="56"
+                r="54"
+                fill="none"
+                stroke="#1a1f2c"
+                strokeWidth="2"
+                strokeDasharray={`${2 * Math.PI * 54}`}
+                strokeDashoffset={`${2 * Math.PI * 54 * (1 - timeLeft / totalTime)}`}
+                className="transition-all duration-1000"
+              />
+            </svg>
+          </div>
+          
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-xl font-medium text-gray-800">
+              {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
