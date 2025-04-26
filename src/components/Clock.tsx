@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Circle } from 'lucide-react';
+import { format } from 'date-fns';
 
 interface ClockProps {
   timeLeft: number;
@@ -31,6 +32,11 @@ const Clock: React.FC<ClockProps> = ({ timeLeft, totalTime }) => {
 
   return (
     <div className="flex flex-col items-center justify-center w-full p-4">
+      {/* Display current time in 24-hour format */}
+      <div className="text-2xl font-medium mb-2">
+        {format(currentTime, 'HH:mm')}
+      </div>
+      
       <div className="relative w-64 h-64">
         {/* Background circle */}
         <svg className="w-full h-full transform -rotate-90" viewBox="0 0 200 200">
