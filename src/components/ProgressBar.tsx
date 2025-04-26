@@ -1,5 +1,6 @@
 
 import React from 'react';
+import Fireworks from './Fireworks';
 
 interface ProgressBarProps {
   progress: number; // 0 to 100
@@ -12,6 +13,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ progress }) => {
         className="absolute bottom-0 left-0 right-0 bg-yellow-400 rounded-full transition-all duration-1000 ease-in-out"
         style={{ height: `${progress}%` }}
       ></div>
+      {progress === 100 && <Fireworks />}
     </div>
   );
 };
