@@ -133,8 +133,8 @@ const Index = () => {
   };
 
   return (
-    <div className={`max-w-5xl mx-auto my-4 min-h-[calc(100vh-2rem)] flex ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-gray-50 text-gray-900'} border border-gray-300 rounded-md overflow-hidden transition-colors duration-200`}>
-      <div className={`w-32 ${isDarkMode ? 'bg-gray-900' : 'bg-slate-50'} p-3 border-r ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} flex flex-col transition-colors duration-200`}>
+    <div className={`max-w-5xl mx-auto my-4 min-h-[calc(100vh-2rem)] flex flex-col md:flex-row ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-gray-50 text-gray-900'} border border-gray-300 rounded-md overflow-hidden transition-colors duration-200`}>
+      <div className={`w-full md:w-32 ${isDarkMode ? 'bg-gray-900' : 'bg-slate-50'} p-3 border-b md:border-b-0 md:border-r ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} flex flex-row md:flex-col transition-colors duration-200`}>
         <div className="mb-6">
           <Logo />
         </div>
@@ -190,7 +190,7 @@ const Index = () => {
           </div>
         </div>
         
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className={`col-span-1 ${isDarkMode ? 'bg-gray-700' : 'bg-white'} rounded-lg border ${isDarkMode ? 'border-gray-600' : 'border-gray-200'} p-3 shadow-sm transition-colors duration-200`}>
             <h2 className={`text-sm font-medium mb-2 ${isDarkMode ? 'text-gray-200' : ''} transition-colors duration-200`}>Current Task</h2>
             <div className={`text-center text-xs mb-2 ${isDarkMode ? 'text-gray-300' : ''} transition-colors duration-200`}>
@@ -199,7 +199,7 @@ const Index = () => {
             <Clock timeLeft={timeLeft || 0} totalTime={totalTime} />
           </div>
           
-          <div className="col-span-2 flex flex-col">
+          <div className="col-span-1 md:col-span-2 flex flex-col">
             <div className="flex justify-between items-center mb-3">
               <h2 className={`text-sm font-medium ${isDarkMode ? 'text-gray-200' : ''} transition-colors duration-200`}>Task</h2>
               <span className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-200`}>today</span>
@@ -219,7 +219,7 @@ const Index = () => {
         </div>
       </div>
       
-      <div className={`w-10 flex items-center justify-center px-2 py-8 border-l ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} ${isDarkMode ? 'bg-gray-900' : ''} transition-colors duration-200`}>
+      <div className={`w-full md:w-10 flex md:flex-col items-center justify-center p-2 md:px-2 md:py-8 border-t md:border-t-0 md:border-l ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} ${isDarkMode ? 'bg-gray-900' : ''} transition-colors duration-200`}>
         <ProgressBar progress={calculateProgress()} />
       </div>
     </div>

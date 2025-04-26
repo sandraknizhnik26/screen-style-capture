@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Play, Pause, RotateCcw } from 'lucide-react';
 import { format } from 'date-fns';
@@ -120,7 +119,9 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) =
           className={isMobile ? "w-10 h-10" : "w-12 h-12"}
         >
           {isRunning ? (
-            <Pause className={isMobile ? "h-5 w-5" : "h-6 w-6"} className="text-yellow-500" />
+            <Pause 
+              className={`${isMobile ? "h-5 w-5" : "h-6 w-6"} text-yellow-500`}
+            />
           ) : (
             <Play 
               className={`${isMobile ? "h-5 w-5" : "h-6 w-6"} ${hasStarted && !isRunning ? 'text-green-500' : ''}`} 
