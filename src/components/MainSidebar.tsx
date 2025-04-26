@@ -17,7 +17,7 @@ interface MainSidebarProps {
 
 const MainSidebar = ({ selectedMood, onMoodSelect, headerContent }: MainSidebarProps) => {
   return (
-    <div className="hidden md:block h-full">
+    <div className="hidden md:block h-full w-64"> {/* Increased width from w-56 to w-64 */}
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent className="flex flex-col items-center py-4">
