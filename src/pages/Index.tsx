@@ -167,12 +167,12 @@ const Index = () => {
           </div>
           
           {/* Tasks list */}
-          <div className="col-span-2">
+          <div className="col-span-2 flex flex-col">
             <div className="flex justify-between items-center mb-3">
               <h2 className="text-sm font-medium">Task</h2>
               <span className="text-xs text-gray-600">today</span>
             </div>
-            <div className="space-y-1.5">
+            <div className="space-y-1.5 flex-1">
               {tasks.map(task => (
                 <TaskItem
                   key={task.id}
