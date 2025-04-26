@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Play, RotateCcw } from 'lucide-react';
 import { format } from 'date-fns';
@@ -35,11 +34,11 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime }) =
     return () => clearInterval(intervalId);
   }, [isRunning]);
 
-  const progress = Math.min(100, Math.max(0, ((totalTime - timeLeft) / totalTime) * 100));
+  const progress = Math.min(100, Math.max(0, (timeLeft / totalTime) * 100));
   
   const radius = 90;
   const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (progress / 100) * circumference;
+  const strokeDashoffset = circumference - ((100 - progress) / 100) * circumference;
   
   const minutes = Math.floor(timeLeft / 60);
   const seconds = Math.floor(timeLeft % 60);
