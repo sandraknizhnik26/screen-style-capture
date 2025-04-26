@@ -80,13 +80,13 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime, cur
   const timeTextSize = isMobile ? "text-4xl" : "text-6xl";
 
   return (
-    <div className="flex flex-col items-center justify-center w-full p-4">
-      <div className="text-2xl font-medium mb-4">
+    <div className="flex flex-col items-center justify-center w-full p-2">
+      <div className="text-xl font-medium mb-2">
         {format(currentTime, 'HH:mm')}
       </div>
       
-      <h2 className="text-sm font-medium mb-2">Current Task</h2>
-      <div className="text-center text-xs mb-4">
+      <h2 className="text-sm font-medium mb-1">Current Task</h2>
+      <div className="text-center text-xs mb-2">
         {currentTask ? currentTask.title : "No task selected"}
       </div>
 
@@ -125,7 +125,7 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime, cur
         </div>
       </div>
 
-      <div className="flex gap-2 mt-4">
+      <div className="flex gap-2 mt-2">
         <Button
           variant="outline"
           size="icon"
