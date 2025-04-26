@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Play, Pause, RotateCcw } from 'lucide-react';
 import { format } from 'date-fns';
@@ -76,17 +77,17 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime, cur
     setHasStarted(false);
   };
 
-  const clockSize = isMobile ? "w-52 h-52" : "w-64 h-64";
-  const timeTextSize = isMobile ? "text-4xl" : "text-6xl";
+  const clockSize = isMobile ? "w-48 h-48" : "w-56 h-56";
+  const timeTextSize = isMobile ? "text-4xl" : "text-5xl";
 
   return (
-    <div className="flex flex-col items-center justify-center w-full p-4">
-      <div className="text-2xl font-medium mb-4">
+    <div className="flex flex-col items-center justify-center w-full p-2">
+      <div className="text-xl font-medium mb-2">
         {format(currentTime, 'HH:mm')}
       </div>
       
-      <h2 className="text-sm font-medium mb-2">Current Task</h2>
-      <div className="text-center text-xs mb-4">
+      <h2 className="text-xs font-medium mb-1">Current Task</h2>
+      <div className="text-center text-xs mb-2">
         {currentTask ? currentTask.title : "No task selected"}
       </div>
 
@@ -125,20 +126,20 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime, cur
         </div>
       </div>
 
-      <div className="flex gap-2 mt-4">
+      <div className="flex gap-2 mt-2">
         <Button
           variant="outline"
           size="icon"
           onClick={handlePlayPause}
-          className={isMobile ? "w-10 h-10" : "w-12 h-12"}
+          className={isMobile ? "w-9 h-9" : "w-10 h-10"}
         >
           {isRunning ? (
             <Pause 
-              className={`${isMobile ? "h-5 w-5" : "h-6 w-6"} text-yellow-500`}
+              className={`${isMobile ? "h-4 w-4" : "h-5 w-5"} text-yellow-500`}
             />
           ) : (
             <Play 
-              className={`${isMobile ? "h-5 w-5" : "h-6 w-6"} ${hasStarted && !isRunning ? 'text-green-500' : ''}`} 
+              className={`${isMobile ? "h-4 w-4" : "h-5 w-5"} ${hasStarted && !isRunning ? 'text-green-500' : ''}`} 
             />
           )}
         </Button>
@@ -146,9 +147,9 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime, cur
           variant="outline"
           size="icon"
           onClick={handleReset}
-          className={isMobile ? "w-10 h-10" : "w-12 h-12"}
+          className={isMobile ? "w-9 h-9" : "w-10 h-10"}
         >
-          <RotateCcw className={isMobile ? "h-5 w-5" : "h-6 w-6"} />
+          <RotateCcw className={isMobile ? "h-4 w-4" : "h-5 w-5"} />
         </Button>
       </div>
     </div>
