@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import MainSidebar from '@/components/MainSidebar';
 import Clock from '@/components/Clock';
@@ -9,6 +10,11 @@ export default function Index() {
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [language, setLanguage] = useState<'en' | 'he'>('en');
+  
+  // Add state for Clock component props
+  const [timeLeft, setTimeLeft] = useState(1500); // Default to 25 minutes in seconds
+  const [totalTime, setTotalTime] = useState(1500);
+  const [currentTask, setCurrentTask] = useState(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -46,7 +52,11 @@ export default function Index() {
             onLanguageChange={handleLanguageChange}
             headerContent={
               <div className="w-full px-2">
-                <Clock />
+                <Clock 
+                  timeLeft={timeLeft}
+                  totalTime={totalTime}
+                  currentTask={currentTask}
+                />
               </div>
             }
           />
