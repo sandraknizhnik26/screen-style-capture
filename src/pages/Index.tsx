@@ -206,7 +206,7 @@ const Index = () => {
                 />
               </div>
 
-              <div className="flex flex-col gap-6">
+              <div className="flex gap-6">
                 <div className="md:hidden w-full h-6">
                   <ProgressBar progress={calculateProgress()} />
                 </div>
@@ -228,7 +228,8 @@ const Index = () => {
                     ))}
                   </div>
                 </div>
-                <div className="hidden md:block w-6">
+                
+                <div className="hidden md:block h-full">
                   <ProgressBar progress={calculateProgress()} />
                 </div>
               </div>
