@@ -158,6 +158,10 @@ const Index = () => {
             selectedMood={selectedMood} 
             onMoodSelect={setSelectedMood} 
             headerContent={SidebarHeader}
+            isDarkMode={isDarkMode}
+            onToggleTheme={toggleDarkMode}
+            currentLanguage={language}
+            onLanguageChange={handleLanguageChange}
           />
         </div>
         
@@ -255,13 +259,6 @@ const Index = () => {
                 <LanguageSwitcher currentLanguage={language} onLanguageChange={handleLanguageChange} />
                 <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleDarkMode} />
               </div>
-            </div>
-          </div>
-
-          <div className={`hidden md:flex items-center justify-between p-4 border-t ${isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200'} transition-colors duration-200`}>
-            <div className="flex items-center gap-4">
-              <LanguageSwitcher currentLanguage={language} onLanguageChange={handleLanguageChange} />
-              <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleDarkMode} />
             </div>
           </div>
         </div>
