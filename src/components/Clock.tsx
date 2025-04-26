@@ -80,7 +80,7 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime, cur
   const timeTextSize = isMobile ? "text-4xl" : "text-5xl";
 
   return (
-    <div className="flex flex-col items-center justify-center w-full py-2">
+    <div className="flex flex-col items-center justify-center w-full py-1">
       <div className="text-xl font-medium mb-2">
         {format(currentTime, 'HH:mm')}
       </div>
@@ -125,7 +125,7 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime, cur
         </div>
       </div>
 
-      <div className="flex gap-2 mt-1">
+      <div className="flex gap-2 mt-0.5">
         <Button
           variant="outline"
           size="icon"
