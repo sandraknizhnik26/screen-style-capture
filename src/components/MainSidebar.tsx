@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   SidebarContent,
@@ -51,14 +50,14 @@ const MainSidebar = ({
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
-          <SidebarGroupContent className="flex flex-col gap-2">
-            <button className="text-[10px] py-1 px-1.5 rounded mb-1 text-left bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200">
+          <SidebarGroupContent className="flex flex-col gap-2 items-center">
+            <button className="text-[10px] py-1 px-1.5 rounded mb-1 text-center bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200 w-48">
               View recommendations
             </button>
-            <button className="text-[10px] py-1 px-1.5 rounded mb-1 text-left bg-cyan-500 text-white hover:bg-cyan-600 transition-colors duration-200">
+            <button className="text-[10px] py-1 px-1.5 rounded mb-1 text-center bg-cyan-500 text-white hover:bg-cyan-600 transition-colors duration-200 w-48">
               Do a new assessment
             </button>
-            <button className="text-[10px] py-1 px-1.5 rounded mb-1 text-left bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200">
+            <button className="text-[10px] py-1 px-1.5 rounded mb-1 text-center bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200 w-48">
               My assessments
             </button>
           </SidebarGroupContent>
