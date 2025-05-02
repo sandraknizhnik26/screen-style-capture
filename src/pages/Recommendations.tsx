@@ -4,6 +4,7 @@ import { Activity, Nut, Recycle, ClipboardCheck } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from 'react-router-dom';
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import AppHeader from '@/components/AppHeader';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
