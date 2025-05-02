@@ -2,7 +2,6 @@
 import React from 'react';
 import { Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 interface LanguageSwitcherProps {
   currentLanguage: string;

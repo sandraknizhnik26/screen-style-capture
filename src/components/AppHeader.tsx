@@ -6,9 +6,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ThemeToggle from './ThemeToggle';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const AppHeader: React.FC = () => {
-  const { language } = useLanguage();
+  const { language, setLanguage } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const isAssessmentPage = location.pathname.includes('/assessment');
   const isRTL = language === 'he';
@@ -36,8 +38,14 @@ const AppHeader: React.FC = () => {
         )}
       </div>
       <div className={`flex items-center space-x-4 ${isRTL ? 'space-x-reverse' : ''}`}>
-        <LanguageSwitcher currentLanguage={language} onLanguageChange={(lang) => {}} />
-        <ThemeToggle isDarkMode={false} onToggle={() => {}} />
+        <LanguageSwitcher 
+          currentLanguage={language} 
+          onLanguageChange={setLanguage} 
+        />
+        <ThemeToggle 
+          isDarkMode={theme === 'dark'} 
+          onToggle={toggleTheme} 
+        />
         <span className="text-sm text-muted-foreground">
           Tuesday, Jan 21th, 2025
         </span>
