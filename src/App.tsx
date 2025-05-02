@@ -10,26 +10,32 @@ import Recommendations from "./pages/Recommendations";
 import TeacherAssessment from "./pages/TeacherAssessment";
 import ParentAssessment from "./pages/ParentAssessment"; 
 import ChildAssessment from "./pages/ChildAssessment";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/recommendations" element={<Recommendations />} />
-          <Route path="/assessment/teacher" element={<TeacherAssessment />} />
-          <Route path="/assessment/parent" element={<ParentAssessment />} />
-          <Route path="/assessment/child" element={<ChildAssessment />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/recommendations" element={<Recommendations />} />
+              <Route path="/assessment/teacher" element={<TeacherAssessment />} />
+              <Route path="/assessment/parent" element={<ParentAssessment />} />
+              <Route path="/assessment/child" element={<ChildAssessment />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </LanguageProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 

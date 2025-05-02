@@ -2,13 +2,21 @@
 import React from 'react';
 import { Activity, Nut, Recycle, ClipboardCheck } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Link } from 'react-router-dom';
+import AppHeader from '@/components/AppHeader';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useTheme } from '@/contexts/ThemeContext';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const Recommendations = () => {
+  const { language, setLanguage } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
+  const isRTL = language === 'he';
+  
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background" dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="max-w-7xl mx-auto p-4">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
@@ -19,10 +27,18 @@ const Recommendations = () => {
               className="h-12 w-auto"
             />
             <div className="text-sm text-muted-foreground">
-              {'>'} View recommendations {'>'} Recommendations
+              {isRTL ? '> צפה בהמלצות > המלצות' : '> View recommendations > Recommendations'}
             </div>
           </div>
           <div className="flex items-center space-x-4">
+            <LanguageSwitcher 
+              currentLanguage={language} 
+              onLanguageChange={(lang) => setLanguage(lang)} 
+            />
+            <ThemeToggle 
+              isDarkMode={theme === 'dark'} 
+              onToggle={toggleTheme} 
+            />
             <span className="text-sm text-muted-foreground">
               Tuesday, Jan 21th, 2025
             </span>
@@ -33,9 +49,13 @@ const Recommendations = () => {
           </div>
         </div>
 
-        <h1 className="text-3xl font-semibold text-center mb-12">Good morning, Sara</h1>
+        <h1 className="text-3xl font-semibold text-center mb-12">
+          {isRTL ? 'בוקר טוב, שרה' : 'Good morning, Sara'}
+        </h1>
         
-        <h2 className="text-2xl font-medium text-center mb-8">Recommendations</h2>
+        <h2 className="text-2xl font-medium text-center mb-8">
+          {isRTL ? 'המלצות' : 'Recommendations'}
+        </h2>
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -45,7 +65,9 @@ const Recommendations = () => {
                 <div className="p-4 rounded-full bg-white/80 backdrop-blur-sm">
                   <Nut className="h-8 w-8 text-emerald-600" />
                 </div>
-                <h3 className="text-xl font-medium text-gray-800">Nutritional Advice</h3>
+                <h3 className="text-xl font-medium text-gray-800">
+                  {isRTL ? 'עצות תזונתיות' : 'Nutritional Advice'}
+                </h3>
               </div>
             </CardContent>
           </Card>
@@ -56,7 +78,9 @@ const Recommendations = () => {
                 <div className="p-4 rounded-full bg-white/80 backdrop-blur-sm">
                   <Activity className="h-8 w-8 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-medium text-gray-800">Physical Activity Suggestions</h3>
+                <h3 className="text-xl font-medium text-gray-800">
+                  {isRTL ? 'הצעות לפעילות גופנית' : 'Physical Activity Suggestions'}
+                </h3>
               </div>
             </CardContent>
           </Card>
@@ -67,14 +91,18 @@ const Recommendations = () => {
                 <div className="p-4 rounded-full bg-white/80 backdrop-blur-sm">
                   <Recycle className="h-8 w-8 text-purple-600" />
                 </div>
-                <h3 className="text-xl font-medium text-gray-800">Environmental Modifications</h3>
+                <h3 className="text-xl font-medium text-gray-800">
+                  {isRTL ? 'שינויים סביבתיים' : 'Environmental Modifications'}
+                </h3>
               </div>
             </CardContent>
           </Card>
         </div>
 
         {/* Assessment Cards */}
-        <h2 className="text-2xl font-medium text-center mb-8">Assessments</h2>
+        <h2 className="text-2xl font-medium text-center mb-8">
+          {isRTL ? 'הערכות' : 'Assessments'}
+        </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <Link to="/assessment/teacher" className="block">
@@ -84,9 +112,15 @@ const Recommendations = () => {
                   <div className="p-4 rounded-full bg-white/80 backdrop-blur-sm">
                     <ClipboardCheck className="h-8 w-8 text-amber-600" />
                   </div>
-                  <h3 className="text-xl font-medium text-gray-800">Teacher Assessment</h3>
-                  <p className="text-sm text-center text-gray-600">Progress monitoring for teachers to evaluate classroom performance</p>
-                  <Button variant="outline" className="mt-2">Start Assessment</Button>
+                  <h3 className="text-xl font-medium text-gray-800">
+                    {isRTL ? 'הערכת מורה' : 'Teacher Assessment'}
+                  </h3>
+                  <p className="text-sm text-center text-gray-600">
+                    {isRTL ? 'מעקב התקדמות למורים להערכת ביצועים בכיתה' : 'Progress monitoring for teachers to evaluate classroom performance'}
+                  </p>
+                  <Button variant="outline" className="mt-2">
+                    {isRTL ? 'התחל הערכה' : 'Start Assessment'}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -99,9 +133,15 @@ const Recommendations = () => {
                   <div className="p-4 rounded-full bg-white/80 backdrop-blur-sm">
                     <ClipboardCheck className="h-8 w-8 text-green-600" />
                   </div>
-                  <h3 className="text-xl font-medium text-gray-800">Parent Assessment</h3>
-                  <p className="text-sm text-center text-gray-600">Home-based observations and progress tracking for parents</p>
-                  <Button variant="outline" className="mt-2">Start Assessment</Button>
+                  <h3 className="text-xl font-medium text-gray-800">
+                    {isRTL ? 'הערכת הורה' : 'Parent Assessment'}
+                  </h3>
+                  <p className="text-sm text-center text-gray-600">
+                    {isRTL ? 'תצפיות ומעקב התקדמות ביתי להורים' : 'Home-based observations and progress tracking for parents'}
+                  </p>
+                  <Button variant="outline" className="mt-2">
+                    {isRTL ? 'התחל הערכה' : 'Start Assessment'}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -114,9 +154,15 @@ const Recommendations = () => {
                   <div className="p-4 rounded-full bg-white/80 backdrop-blur-sm">
                     <ClipboardCheck className="h-8 w-8 text-blue-600" />
                   </div>
-                  <h3 className="text-xl font-medium text-gray-800">Child Assessment</h3>
-                  <p className="text-sm text-center text-gray-600">Self-reported feelings and observations from the child</p>
-                  <Button variant="outline" className="mt-2">Start Assessment</Button>
+                  <h3 className="text-xl font-medium text-gray-800">
+                    {isRTL ? 'הערכת ילד' : 'Child Assessment'}
+                  </h3>
+                  <p className="text-sm text-center text-gray-600">
+                    {isRTL ? 'רגשות ותצפיות מדווחות עצמית מהילד' : 'Self-reported feelings and observations from the child'}
+                  </p>
+                  <Button variant="outline" className="mt-2">
+                    {isRTL ? 'התחל הערכה' : 'Start Assessment'}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -124,13 +170,15 @@ const Recommendations = () => {
         </div>
 
         {/* Formal Recommendations Section */}
-        <div className="bg-white rounded-lg shadow-sm border p-6">
-          <h3 className="text-xl font-medium mb-4">Formal recommendatins file:</h3>
-          <div className="bg-gray-50 rounded-lg p-4 border">
+        <div className="bg-white rounded-lg shadow-sm border p-6 dark:bg-gray-800 dark:border-gray-700">
+          <h3 className="text-xl font-medium mb-4">
+            {isRTL ? 'קובץ המלצות פורמלי:' : 'Formal recommendatins file:'}
+          </h3>
+          <div className="bg-gray-50 rounded-lg p-4 border dark:bg-gray-700 dark:border-gray-600">
             <div className="text-center py-12">
               <h4 className="text-xl font-medium mb-2">CHAPTER 1</h4>
-              <p className="text-gray-600 uppercase">SUMMARY OF FINDINGS, CONCLUSION, AND</p>
-              <p className="text-gray-600 uppercase">RECOMMENDATIONS</p>
+              <p className="text-gray-600 uppercase dark:text-gray-300">SUMMARY OF FINDINGS, CONCLUSION, AND</p>
+              <p className="text-gray-600 uppercase dark:text-gray-300">RECOMMENDATIONS</p>
             </div>
           </div>
         </div>
