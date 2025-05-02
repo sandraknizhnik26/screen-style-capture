@@ -57,7 +57,7 @@ const ChildAssessment = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-8" dir={isRTL ? 'rtl' : 'ltr'}>
+    <div className={`min-h-screen bg-background p-4 md:p-8 ${isRTL ? 'text-right' : 'text-left'}`} dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="max-w-3xl mx-auto">
         <div className="flex justify-between items-center mb-6">
           <Link to="/recommendations" className={`flex items-center text-sm text-muted-foreground hover:text-foreground ${isRTL ? 'flex-row-reverse' : ''}`}>
@@ -89,9 +89,9 @@ const ChildAssessment = () => {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t['name']}:</FormLabel>
+                        <FormLabel className={`flex ${isRTL ? 'justify-end' : 'justify-start'}`}>{t['name']}:</FormLabel>
                         <FormControl>
-                          <Input placeholder={isRTL ? "השם שלך" : "Your name"} {...field} />
+                          <Input placeholder={isRTL ? "השם שלך" : "Your name"} {...field} className={isRTL ? 'text-right' : 'text-left'} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -102,9 +102,9 @@ const ChildAssessment = () => {
                     name="date"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t['date']}:</FormLabel>
+                        <FormLabel className={`flex ${isRTL ? 'justify-end' : 'justify-start'}`}>{t['date']}:</FormLabel>
                         <FormControl>
-                          <Input type="date" {...field} />
+                          <Input type="date" {...field} className={isRTL ? 'text-right' : 'text-left'} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -112,7 +112,7 @@ const ChildAssessment = () => {
                   />
                 </div>
 
-                <h2 className="text-xl font-semibold pt-4">{t['child.howIFeel']}</h2>
+                <h2 className={`text-xl font-semibold pt-4 ${isRTL ? 'text-right' : 'text-left'}`}>{t['child.howIFeel']}</h2>
                 
                 {/* Focus in Class */}
                 <FormField
@@ -120,42 +120,42 @@ const ChildAssessment = () => {
                   name="focusInClass"
                   render={({ field }) => (
                     <FormItem className="space-y-3">
-                      <FormLabel>{t['child.focus']}</FormLabel>
+                      <FormLabel className={`flex ${isRTL ? 'justify-end' : 'justify-start'}`}>{t['child.focus']}</FormLabel>
                       <FormControl>
                         <RadioGroup 
                           onValueChange={field.onChange} 
                           defaultValue={field.value}
                           className="flex flex-col space-y-1"
                         >
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="1" id="focusInClass-1" />
-                            <FormLabel htmlFor="focusInClass-1" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="focusInClass-1" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'בכלל לא' : 'Not at all'}
                             </FormLabel>
+                            <RadioGroupItem value="1" id="focusInClass-1" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="2" id="focusInClass-2" />
-                            <FormLabel htmlFor="focusInClass-2" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="focusInClass-2" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'קצת' : 'A little bit'}
                             </FormLabel>
+                            <RadioGroupItem value="2" id="focusInClass-2" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="3" id="focusInClass-3" />
-                            <FormLabel htmlFor="focusInClass-3" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="focusInClass-3" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'לפעמים' : 'Sometimes'}
                             </FormLabel>
+                            <RadioGroupItem value="3" id="focusInClass-3" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="4" id="focusInClass-4" />
-                            <FormLabel htmlFor="focusInClass-4" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="focusInClass-4" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'רוב הזמן' : 'Most of the time'}
                             </FormLabel>
+                            <RadioGroupItem value="4" id="focusInClass-4" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="5" id="focusInClass-5" />
-                            <FormLabel htmlFor="focusInClass-5" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="focusInClass-5" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'כל הזמן' : 'All the time'}
                             </FormLabel>
+                            <RadioGroupItem value="5" id="focusInClass-5" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
                         </RadioGroup>
                       </FormControl>
@@ -170,42 +170,42 @@ const ChildAssessment = () => {
                   name="feelingLessTired"
                   render={({ field }) => (
                     <FormItem className="space-y-3">
-                      <FormLabel>{t['child.tired']}</FormLabel>
+                      <FormLabel className={`flex ${isRTL ? 'justify-end' : 'justify-start'}`}>{t['child.tired']}</FormLabel>
                       <FormControl>
                         <RadioGroup 
                           onValueChange={field.onChange} 
                           defaultValue={field.value}
                           className="flex flex-col space-y-1"
                         >
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="1" id="feelingLessTired-1" />
-                            <FormLabel htmlFor="feelingLessTired-1" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="feelingLessTired-1" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'בכלל לא' : 'Not at all'}
                             </FormLabel>
+                            <RadioGroupItem value="1" id="feelingLessTired-1" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="2" id="feelingLessTired-2" />
-                            <FormLabel htmlFor="feelingLessTired-2" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="feelingLessTired-2" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'קצת' : 'A little bit'}
                             </FormLabel>
+                            <RadioGroupItem value="2" id="feelingLessTired-2" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="3" id="feelingLessTired-3" />
-                            <FormLabel htmlFor="feelingLessTired-3" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="feelingLessTired-3" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'לפעמים' : 'Sometimes'}
                             </FormLabel>
+                            <RadioGroupItem value="3" id="feelingLessTired-3" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="4" id="feelingLessTired-4" />
-                            <FormLabel htmlFor="feelingLessTired-4" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="feelingLessTired-4" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'רוב הזמן' : 'Most of the time'}
                             </FormLabel>
+                            <RadioGroupItem value="4" id="feelingLessTired-4" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="5" id="feelingLessTired-5" />
-                            <FormLabel htmlFor="feelingLessTired-5" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="feelingLessTired-5" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'כל הזמן' : 'All the time'}
                             </FormLabel>
+                            <RadioGroupItem value="5" id="feelingLessTired-5" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
                         </RadioGroup>
                       </FormControl>
@@ -220,36 +220,36 @@ const ChildAssessment = () => {
                   name="seatHelpsWithFocus"
                   render={({ field }) => (
                     <FormItem className="space-y-3">
-                      <FormLabel>{t['child.seat']}</FormLabel>
+                      <FormLabel className={`flex ${isRTL ? 'justify-end' : 'justify-start'}`}>{t['child.seat']}</FormLabel>
                       <FormControl>
                         <RadioGroup 
                           onValueChange={field.onChange} 
                           defaultValue={field.value}
                           className="flex flex-col space-y-1"
                         >
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="1" id="seatHelpsWithFocus-1" />
-                            <FormLabel htmlFor="seatHelpsWithFocus-1" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="seatHelpsWithFocus-1" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'לא, אני מוסח/ת יותר' : 'No, I get distracted more'}
                             </FormLabel>
+                            <RadioGroupItem value="1" id="seatHelpsWithFocus-1" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="2" id="seatHelpsWithFocus-2" />
-                            <FormLabel htmlFor="seatHelpsWithFocus-2" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="seatHelpsWithFocus-2" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'זה לא משנה' : 'It makes no difference'}
                             </FormLabel>
+                            <RadioGroupItem value="2" id="seatHelpsWithFocus-2" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="3" id="seatHelpsWithFocus-3" />
-                            <FormLabel htmlFor="seatHelpsWithFocus-3" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="seatHelpsWithFocus-3" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'זה עוזר קצת' : 'It helps a little'}
                             </FormLabel>
+                            <RadioGroupItem value="3" id="seatHelpsWithFocus-3" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="4" id="seatHelpsWithFocus-4" />
-                            <FormLabel htmlFor="seatHelpsWithFocus-4" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="seatHelpsWithFocus-4" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'זה עוזר הרבה' : 'It helps a lot'}
                             </FormLabel>
+                            <RadioGroupItem value="4" id="seatHelpsWithFocus-4" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
                         </RadioGroup>
                       </FormControl>
@@ -264,36 +264,36 @@ const ChildAssessment = () => {
                   name="feelingAboutFood"
                   render={({ field }) => (
                     <FormItem className="space-y-3">
-                      <FormLabel>{t['child.food']}</FormLabel>
+                      <FormLabel className={`flex ${isRTL ? 'justify-end' : 'justify-start'}`}>{t['child.food']}</FormLabel>
                       <FormControl>
                         <RadioGroup 
                           onValueChange={field.onChange} 
                           defaultValue={field.value}
                           className="flex flex-col space-y-1"
                         >
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="1" id="feelingAboutFood-1" />
-                            <FormLabel htmlFor="feelingAboutFood-1" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="feelingAboutFood-1" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'אני לא אוהב/ת אותם בכלל' : 'I don\'t like them at all'}
                             </FormLabel>
+                            <RadioGroupItem value="1" id="feelingAboutFood-1" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="2" id="feelingAboutFood-2" />
-                            <FormLabel htmlFor="feelingAboutFood-2" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="feelingAboutFood-2" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'אני אוהב/ת חלק מהם' : 'I like some of them'}
                             </FormLabel>
+                            <RadioGroupItem value="2" id="feelingAboutFood-2" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="3" id="feelingAboutFood-3" />
-                            <FormLabel htmlFor="feelingAboutFood-3" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="feelingAboutFood-3" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'אני אוהב/ת את רובם' : 'I like most of them'}
                             </FormLabel>
+                            <RadioGroupItem value="3" id="feelingAboutFood-3" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="4" id="feelingAboutFood-4" />
-                            <FormLabel htmlFor="feelingAboutFood-4" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="feelingAboutFood-4" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'אני נהנה/ית מהם מאוד' : 'I enjoy them a lot'}
                             </FormLabel>
+                            <RadioGroupItem value="4" id="feelingAboutFood-4" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
                         </RadioGroup>
                       </FormControl>
@@ -308,42 +308,42 @@ const ChildAssessment = () => {
                   name="physicalActivityHelps"
                   render={({ field }) => (
                     <FormItem className="space-y-3">
-                      <FormLabel>{t['child.physicalActivity']}</FormLabel>
+                      <FormLabel className={`flex ${isRTL ? 'justify-end' : 'justify-start'}`}>{t['child.physicalActivity']}</FormLabel>
                       <FormControl>
                         <RadioGroup 
                           onValueChange={field.onChange} 
                           defaultValue={field.value}
                           className="flex flex-col space-y-1"
                         >
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="1" id="physicalActivityHelps-1" />
-                            <FormLabel htmlFor="physicalActivityHelps-1" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="physicalActivityHelps-1" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'בכלל לא' : 'Not at all'}
                             </FormLabel>
+                            <RadioGroupItem value="1" id="physicalActivityHelps-1" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="2" id="physicalActivityHelps-2" />
-                            <FormLabel htmlFor="physicalActivityHelps-2" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="physicalActivityHelps-2" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'קצת' : 'A little bit'}
                             </FormLabel>
+                            <RadioGroupItem value="2" id="physicalActivityHelps-2" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="3" id="physicalActivityHelps-3" />
-                            <FormLabel htmlFor="physicalActivityHelps-3" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="physicalActivityHelps-3" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'לפעמים' : 'Sometimes'}
                             </FormLabel>
+                            <RadioGroupItem value="3" id="physicalActivityHelps-3" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="4" id="physicalActivityHelps-4" />
-                            <FormLabel htmlFor="physicalActivityHelps-4" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="physicalActivityHelps-4" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'רוב הזמן' : 'Most of the time'}
                             </FormLabel>
+                            <RadioGroupItem value="4" id="physicalActivityHelps-4" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
-                          <div className={`flex items-center space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
-                            <RadioGroupItem value="5" id="physicalActivityHelps-5" />
-                            <FormLabel htmlFor="physicalActivityHelps-5" className="font-normal cursor-pointer">
+                          <div className={`flex items-center ${isRTL ? 'justify-end space-x-reverse space-x-2' : 'justify-start space-x-2'}`}>
+                            <FormLabel htmlFor="physicalActivityHelps-5" className={`font-normal cursor-pointer ${isRTL ? 'order-1' : 'order-2'}`}>
                               {isRTL ? 'תמיד' : 'Always'}
                             </FormLabel>
+                            <RadioGroupItem value="5" id="physicalActivityHelps-5" className={isRTL ? 'order-2' : 'order-1'} />
                           </div>
                         </RadioGroup>
                       </FormControl>
