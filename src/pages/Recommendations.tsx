@@ -1,8 +1,10 @@
 
 import React from 'react';
-import { Activity, Nut, Recycle } from 'lucide-react';
+import { Activity, Nut, Recycle, ClipboardCheck } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Link } from 'react-router-dom';
 
 const Recommendations = () => {
   return (
@@ -69,6 +71,56 @@ const Recommendations = () => {
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Assessment Cards */}
+        <h2 className="text-2xl font-medium text-center mb-8">Assessments</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <Link to="/assessment/teacher" className="block">
+            <Card className="group hover:shadow-lg transition-all duration-200 cursor-pointer overflow-hidden h-full">
+              <CardContent className="p-6 bg-gradient-to-br from-amber-100 to-yellow-50">
+                <div className="flex flex-col items-center space-y-4">
+                  <div className="p-4 rounded-full bg-white/80 backdrop-blur-sm">
+                    <ClipboardCheck className="h-8 w-8 text-amber-600" />
+                  </div>
+                  <h3 className="text-xl font-medium text-gray-800">Teacher Assessment</h3>
+                  <p className="text-sm text-center text-gray-600">Progress monitoring for teachers to evaluate classroom performance</p>
+                  <Button variant="outline" className="mt-2">Start Assessment</Button>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
+
+          <Link to="/assessment/parent" className="block">
+            <Card className="group hover:shadow-lg transition-all duration-200 cursor-pointer overflow-hidden h-full">
+              <CardContent className="p-6 bg-gradient-to-br from-green-100 to-emerald-50">
+                <div className="flex flex-col items-center space-y-4">
+                  <div className="p-4 rounded-full bg-white/80 backdrop-blur-sm">
+                    <ClipboardCheck className="h-8 w-8 text-green-600" />
+                  </div>
+                  <h3 className="text-xl font-medium text-gray-800">Parent Assessment</h3>
+                  <p className="text-sm text-center text-gray-600">Home-based observations and progress tracking for parents</p>
+                  <Button variant="outline" className="mt-2">Start Assessment</Button>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
+
+          <Link to="/assessment/child" className="block">
+            <Card className="group hover:shadow-lg transition-all duration-200 cursor-pointer overflow-hidden h-full">
+              <CardContent className="p-6 bg-gradient-to-br from-blue-100 to-sky-50">
+                <div className="flex flex-col items-center space-y-4">
+                  <div className="p-4 rounded-full bg-white/80 backdrop-blur-sm">
+                    <ClipboardCheck className="h-8 w-8 text-blue-600" />
+                  </div>
+                  <h3 className="text-xl font-medium text-gray-800">Child Assessment</h3>
+                  <p className="text-sm text-center text-gray-600">Self-reported feelings and observations from the child</p>
+                  <Button variant="outline" className="mt-2">Start Assessment</Button>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
         </div>
 
         {/* Formal Recommendations Section */}
