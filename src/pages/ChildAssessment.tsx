@@ -89,7 +89,7 @@ const ChildAssessment = () => {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className={`flex ${isRTL ? 'justify-end' : 'justify-start'}`}>{t['name']}:</FormLabel>
+                        <FormLabel className={`block text-sm font-medium ${isRTL ? 'text-right w-full' : 'text-left'}`}>{t['name']}:</FormLabel>
                         <FormControl>
                           <Input placeholder={isRTL ? "השם שלך" : "Your name"} {...field} className={isRTL ? 'text-right' : 'text-left'} />
                         </FormControl>
@@ -102,7 +102,7 @@ const ChildAssessment = () => {
                     name="date"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className={`flex ${isRTL ? 'justify-end' : 'justify-start'}`}>{t['date']}:</FormLabel>
+                        <FormLabel className={`block text-sm font-medium ${isRTL ? 'text-right w-full' : 'text-left'}`}>{t['date']}:</FormLabel>
                         <FormControl>
                           <Input type="date" {...field} className={isRTL ? 'text-right' : 'text-left'} />
                         </FormControl>
@@ -112,7 +112,7 @@ const ChildAssessment = () => {
                   />
                 </div>
 
-                <h2 className={`text-xl font-semibold pt-4 ${isRTL ? 'text-right' : 'text-left'}`}>{t['child.howIFeel']}</h2>
+                <h2 className={`text-xl font-semibold pt-4 ${isRTL ? 'text-right w-full' : 'text-left'}`}>{t['child.howIFeel']}</h2>
                 
                 {/* Focus in Class */}
                 <FormField
@@ -120,7 +120,7 @@ const ChildAssessment = () => {
                   name="focusInClass"
                   render={({ field }) => (
                     <FormItem className="space-y-3">
-                      <FormLabel className={`flex ${isRTL ? 'justify-end' : 'justify-start'}`}>{t['child.focus']}</FormLabel>
+                      <FormLabel className={`block text-sm font-medium ${isRTL ? 'text-right w-full' : 'text-left'}`}>{t['child.focus']}</FormLabel>
                       <FormControl>
                         <RadioGroup 
                           onValueChange={field.onChange} 
@@ -170,7 +170,7 @@ const ChildAssessment = () => {
                   name="feelingLessTired"
                   render={({ field }) => (
                     <FormItem className="space-y-3">
-                      <FormLabel className={`flex ${isRTL ? 'justify-end' : 'justify-start'}`}>{t['child.tired']}</FormLabel>
+                      <FormLabel className={`block text-sm font-medium ${isRTL ? 'text-right w-full' : 'text-left'}`}>{t['child.tired']}</FormLabel>
                       <FormControl>
                         <RadioGroup 
                           onValueChange={field.onChange} 
@@ -220,7 +220,7 @@ const ChildAssessment = () => {
                   name="seatHelpsWithFocus"
                   render={({ field }) => (
                     <FormItem className="space-y-3">
-                      <FormLabel className={`flex ${isRTL ? 'justify-end' : 'justify-start'}`}>{t['child.seat']}</FormLabel>
+                      <FormLabel className={`block text-sm font-medium ${isRTL ? 'text-right w-full' : 'text-left'}`}>{t['child.seat']}</FormLabel>
                       <FormControl>
                         <RadioGroup 
                           onValueChange={field.onChange} 
@@ -264,7 +264,7 @@ const ChildAssessment = () => {
                   name="feelingAboutFood"
                   render={({ field }) => (
                     <FormItem className="space-y-3">
-                      <FormLabel className={`flex ${isRTL ? 'justify-end' : 'justify-start'}`}>{t['child.food']}</FormLabel>
+                      <FormLabel className={`block text-sm font-medium ${isRTL ? 'text-right w-full' : 'text-left'}`}>{t['child.food']}</FormLabel>
                       <FormControl>
                         <RadioGroup 
                           onValueChange={field.onChange} 
@@ -308,7 +308,7 @@ const ChildAssessment = () => {
                   name="physicalActivityHelps"
                   render={({ field }) => (
                     <FormItem className="space-y-3">
-                      <FormLabel className={`flex ${isRTL ? 'justify-end' : 'justify-start'}`}>{t['child.physicalActivity']}</FormLabel>
+                      <FormLabel className={`block text-sm font-medium ${isRTL ? 'text-right w-full' : 'text-left'}`}>{t['child.physicalActivity']}</FormLabel>
                       <FormControl>
                         <RadioGroup 
                           onValueChange={field.onChange} 
