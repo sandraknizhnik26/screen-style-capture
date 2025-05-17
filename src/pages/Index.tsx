@@ -26,6 +26,11 @@ interface Task {
   timeInSeconds?: number;
 }
 
+// Store task completion state separately from the tasks themselves
+interface TaskCompletionState {
+  [taskId: string]: boolean;
+}
+
 const Index = () => {
   const { language, setLanguage, translations } = useLanguage();
   const { theme, toggleTheme } = useTheme();
@@ -38,66 +43,74 @@ const Index = () => {
   const [totalTime] = useState(1800);
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState(new Date());
+  
+  // Store task completion state separately
+  const [taskCompletionState, setTaskCompletionState] = useState<TaskCompletionState>({
+    "2": true // Task 2 is initially completed
+  });
 
-  const getTasks = () => [
-    { 
-      id: "1", 
-      title: t['mathHomework'],
-      timeEstimation: `(45 ${t['minutes']})`, 
-      completed: false, 
-      category: 'red' as const,
-      stars: 1,
-      starValue: 10,
-      timeInSeconds: 2700
-    },
-    { 
-      id: "2", 
-      title: t['readSummarize'],
-      timeEstimation: `(20 ${t['minutes']})`, 
-      completed: true, 
-      category: 'green' as const,
-      stars: 2,
-      starValue: 15,
-      timeInSeconds: 1200
-    },
-    { 
-      id: "3", 
-      title: t['drawPaint'],
-      timeEstimation: "", 
-      completed: false, 
-      category: 'orange' as const,
-      stars: 2,
-      starValue: 15,
-      timeInSeconds: 1800
-    },
-    { 
-      id: "5", 
-      title: t['watchVideo'],
-      timeEstimation: `(15 ${t['minutes']})`, 
-      completed: false, 
-      category: 'yellow' as const,
-      stars: 3,
-      starValue: 20,
-      timeInSeconds: 900
-    },
-    { 
-      id: "6", 
-      title: t['writeInterestingFacts'],
-      timeEstimation: `(10 ${t['minutes']})`, 
-      completed: false, 
-      category: 'purple' as const,
-      stars: 4,
-      starValue: 30,
-      timeInSeconds: 600
-    },
-  ];
+  const getTasks = () => {
+    const taskList = [
+      { 
+        id: "1", 
+        title: t['mathHomework'],
+        timeEstimation: `(45 ${t['minutes']})`, 
+        category: 'red' as const,
+        stars: 1,
+        starValue: 10,
+        timeInSeconds: 2700
+      },
+      { 
+        id: "2", 
+        title: t['readSummarize'],
+        timeEstimation: `(20 ${t['minutes']})`, 
+        category: 'green' as const,
+        stars: 2,
+        starValue: 15,
+        timeInSeconds: 1200
+      },
+      { 
+        id: "3", 
+        title: t['drawPaint'],
+        timeEstimation: "", 
+        category: 'orange' as const,
+        stars: 2,
+        starValue: 15,
+        timeInSeconds: 1800
+      },
+      { 
+        id: "5", 
+        title: t['watchVideo'],
+        timeEstimation: `(15 ${t['minutes']})`, 
+        category: 'yellow' as const,
+        stars: 3,
+        starValue: 20,
+        timeInSeconds: 900
+      },
+      { 
+        id: "6", 
+        title: t['writeInterestingFacts'],
+        timeEstimation: `(10 ${t['minutes']})`, 
+        category: 'purple' as const,
+        stars: 4,
+        starValue: 30,
+        timeInSeconds: 600
+      },
+    ];
+
+    // Apply the completion state to tasks
+    return taskList.map(task => ({
+      ...task,
+      completed: !!taskCompletionState[task.id]
+    }));
+  };
 
   const [tasks, setTasks] = useState<Task[]>(getTasks());
 
-  // Update tasks when language changes
+  // Update tasks when language changes, but keep completion state
   useEffect(() => {
     setTasks(getTasks());
-  }, [language]);
+  }, [language, taskCompletionState]);
 
   useEffect(() => {
     document.documentElement.dir = language === 'he' ? 'rtl' : 'ltr';
@@ -118,9 +131,11 @@ const Index = () => {
   };
 
   const toggleTaskCompletion = (taskId: string) => {
-    setTasks(tasks.map(task => 
-      task.id === taskId ? { ...task, completed: !task.completed } : task
-    ));
+    // Update the task completion state
+    setTaskCompletionState(prev => ({
+      ...prev,
+      [taskId]: !prev[taskId]
+    }));
   };
 
   const handleLanguageChange = (newLanguage: 'en' | 'he') => {
