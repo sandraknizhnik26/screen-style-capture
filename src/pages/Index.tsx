@@ -11,8 +11,9 @@ import ProgressBar from '@/components/ProgressBar';
 import ThemeToggle from '@/components/ThemeToggle';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import MainSidebar from '@/components/MainSidebar';
-import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface Task {
   id: string;
@@ -26,12 +27,16 @@ interface Task {
 }
 
 const Index = () => {
+  const { language, setLanguage, translations } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
+  const isDarkMode = theme === 'dark';
+  const isRTL = language === 'he';
+  const t = translations[language];
+  
   const [currentTask, setCurrentTask] = useState<Task | null>(null);
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
   const [totalTime] = useState(1800);
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [language, setLanguage] = useState<'en' | 'he'>('en');
   const [currentTime, setCurrentTime] = useState(new Date());
 
   const [tasks, setTasks] = useState<Task[]>([
@@ -88,17 +93,8 @@ const Index = () => {
   ]);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      setIsDarkMode(true);
-      document.documentElement.classList.add('dark');
-    } else {
-      setIsDarkMode(false);
-      document.documentElement.classList.remove('dark');
-    }
-  }, []);
+    document.documentElement.dir = language === 'he' ? 'rtl' : 'ltr';
+  }, [language]);
 
   const handleTaskSelect = (task: Task) => {
     setCurrentTask(task);
@@ -120,19 +116,6 @@ const Index = () => {
     ));
   };
 
-  const toggleDarkMode = () => {
-    const newDarkMode = !isDarkMode;
-    setIsDarkMode(newDarkMode);
-    
-    if (newDarkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  };
-
   const handleLanguageChange = (newLanguage: 'en' | 'he') => {
     setLanguage(newLanguage);
     document.documentElement.dir = newLanguage === 'he' ? 'rtl' : 'ltr';
@@ -142,14 +125,14 @@ const Index = () => {
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full relative" dir={language === 'he' ? 'rtl' : 'ltr'}>
-        <div className={`hidden md:flex flex-col items-center w-80 bg-background border-r ${language === 'he' ? 'border-r-0 border-l' : ''}`}>
+      <div className="min-h-screen flex w-full relative" dir={isRTL ? 'rtl' : 'ltr'}>
+        <div className={`hidden md:flex flex-col items-center w-80 bg-background border-r ${isRTL ? 'border-r-0 border-l' : ''}`}>
           <MainSidebar 
             selectedMood={selectedMood} 
             onMoodSelect={setSelectedMood} 
             headerContent={SidebarHeader}
             isDarkMode={isDarkMode}
-            onToggleTheme={toggleDarkMode}
+            onToggleTheme={toggleTheme}
             currentLanguage={language}
             onLanguageChange={handleLanguageChange}
           />
@@ -158,18 +141,18 @@ const Index = () => {
         <div className="flex-1 max-w-5xl mx-auto p-4 w-full">
           <div className="hidden md:flex justify-end mb-4">
             <div className={`flex items-center gap-2 ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-100'} rounded-lg border shadow-sm overflow-hidden transition-colors duration-200`}>
-              <Avatar className="h-7 w-7 ml-2">
-                <AvatarImage src="https://images.unsplash.com/photo-1501286353178-1ec881214838" />
+              <Avatar className={`h-7 w-7 ${isRTL ? 'mr-2 ml-0' : 'ml-2 mr-0'}`}>
+                <AvatarImage src="https://images.unsplash.com/photo-1501286353178-1ec871214838" />
                 <AvatarFallback>RS</AvatarFallback>
               </Avatar>
               <button className={`flex items-center ${isDarkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-50'} px-3 py-1 text-xs transition-colors duration-200`}>
-                <Settings className="h-3 w-3 mr-1" />
-                Settings
+                <Settings className={`h-3 w-3 ${isRTL ? 'ml-1' : 'mr-1'}`} />
+                {t['settings']}
               </button>
               <div className={`h-4 border-r ${isDarkMode ? 'border-gray-600' : 'border-gray-200'} transition-colors duration-200`}></div>
               <button className={`flex items-center ${isDarkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-50'} px-3 py-1 text-xs transition-colors duration-200`}>
-                <LogOut className="h-3 w-3 mr-1" />
-                Log out
+                <LogOut className={`h-3 w-3 ${isRTL ? 'ml-1' : 'mr-1'}`} />
+                {t['logout']}
               </button>
             </div>
           </div>
@@ -177,39 +160,39 @@ const Index = () => {
           <div className="md:hidden flex flex-col items-center py-4">
             <Logo />
             <div className={`flex items-center gap-2 ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-100'} rounded-lg border shadow-sm overflow-hidden mt-4 transition-colors duration-200`}>
-              <Avatar className="h-7 w-7 ml-2">
-                <AvatarImage src="https://images.unsplash.com/photo-1501286353178-1ec881214838" />
+              <Avatar className={`h-7 w-7 ${isRTL ? 'mr-2 ml-0' : 'ml-2 mr-0'}`}>
+                <AvatarImage src="https://images.unsplash.com/photo-1501286353178-1ec871214838" />
                 <AvatarFallback>RS</AvatarFallback>
               </Avatar>
               <button className={`flex items-center ${isDarkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-50'} px-3 py-1 text-xs transition-colors duration-200`}>
-                <Settings className="h-3 w-3 mr-1" />
-                Settings
+                <Settings className={`h-3 w-3 ${isRTL ? 'ml-1' : 'mr-1'}`} />
+                {t['settings']}
               </button>
               <div className={`h-4 border-r ${isDarkMode ? 'border-gray-600' : 'border-gray-200'} transition-colors duration-200`}></div>
               <button className={`flex items-center ${isDarkMode ? 'text-gray-300 hover:bg-gray-600' : 'text-gray-600 hover:bg-gray-50'} px-3 py-1 text-xs transition-colors duration-200`}>
-                <LogOut className="h-3 w-3 mr-1" />
-                Log out
+                <LogOut className={`h-3 w-3 ${isRTL ? 'ml-1' : 'mr-1'}`} />
+                {t['logout']}
               </button>
             </div>
           </div>
 
           <div className="flex-1 flex flex-col h-full">
-            <h1 className="text-xl font-semibold text-center mb-6">Good morning, Roni</h1>
+            <h1 className={`text-xl font-semibold text-center mb-6 ${isRTL ? 'text-right w-full' : 'text-left'}`}>{t['goodMorning']}, Roni</h1>
 
             <div className="mb-6 md:hidden">
-              <div className="text-center mb-2 text-sm font-medium flex justify-center">How am I feeling today?</div>
+              <div className={`text-center mb-2 text-sm font-medium flex justify-center ${isRTL ? 'flex-row-reverse' : ''}`}>{t['howFeeling']}</div>
               <MoodSelector selectedMood={selectedMood} onMoodSelect={setSelectedMood} />
             </div>
 
-            <div className="flex justify-center gap-2 mb-6 md:hidden">
-              <Link to="/recommendations" className={`text-[10px] py-1 px-1.5 rounded mb-1 text-left ${isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'} transition-colors duration-200`}>
-                View recommendations
+            <div className={`flex justify-center gap-2 mb-6 md:hidden ${isRTL ? 'flex-row-reverse' : ''}`}>
+              <Link to="/recommendations" className={`text-[10px] py-1 px-1.5 rounded mb-1 text-left ${isRTL ? 'text-right' : 'text-left'} ${isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'} transition-colors duration-200`}>
+                {t['viewRecommendations']}
               </Link>
-              <button className="text-[10px] py-1 px-1.5 rounded mb-1 text-left bg-cyan-500 text-white hover:bg-cyan-600 transition-colors duration-200">
-                Do a new assessment
+              <button className={`text-[10px] py-1 px-1.5 rounded mb-1 ${isRTL ? 'text-right' : 'text-left'} bg-cyan-500 text-white hover:bg-cyan-600 transition-colors duration-200`}>
+                {t['newAssessment']}
               </button>
-              <button className={`text-[10px] py-1 px-1.5 rounded mb-1 text-left ${isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'} transition-colors duration-200`}>
-                My assessments
+              <button className={`text-[10px] py-1 px-1.5 rounded mb-1 ${isRTL ? 'text-right' : 'text-left'} ${isDarkMode ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'} transition-colors duration-200`}>
+                {t['myAssessments']}
               </button>
             </div>
 
@@ -228,9 +211,9 @@ const Index = () => {
                 </div>
 
                 <div className="flex-1">
-                  <div className="flex justify-between items-center mb-3">
-                    <h2 className={`text-sm font-medium ${isDarkMode ? 'text-gray-200' : ''} transition-colors duration-200`}>Task</h2>
-                    <span className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-200`}>today</span>
+                  <div className={`flex justify-between items-center mb-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                    <h2 className={`text-sm font-medium ${isDarkMode ? 'text-gray-200' : ''} transition-colors duration-200 ${isRTL ? 'text-right' : 'text-left'}`}>{t['task']}</h2>
+                    <span className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-200`}>{t['today']}</span>
                   </div>
                   <div className="space-y-1.5 flex-1">
                     {tasks.map(task => (
@@ -256,7 +239,7 @@ const Index = () => {
             <div className={`flex items-center justify-between p-4 border-t ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} transition-colors duration-200`}>
               <div className="flex items-center gap-4">
                 <LanguageSwitcher currentLanguage={language} onLanguageChange={handleLanguageChange} />
-                <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleDarkMode} />
+                <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleTheme} />
               </div>
             </div>
           </div>

@@ -12,6 +12,7 @@ import MoodSelector from './MoodSelector';
 import Logo from './Logo';
 import ThemeToggle from './ThemeToggle';
 import LanguageSwitcher from './LanguageSwitcher';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface MainSidebarProps {
   selectedMood: string | null;
@@ -32,6 +33,10 @@ const MainSidebar = ({
   currentLanguage,
   onLanguageChange
 }: MainSidebarProps) => {
+  const { translations } = useLanguage();
+  const t = translations[currentLanguage as 'en' | 'he'];
+  const isRTL = currentLanguage === 'he';
+  
   return (
     <div className="hidden md:block h-full w-80">
       <SidebarContent>
@@ -46,21 +51,23 @@ const MainSidebar = ({
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-center w-full justify-center flex text-sm font-medium">How am I feeling today?</SidebarGroupLabel>
+          <SidebarGroupLabel className={`text-center w-full justify-center flex text-sm font-medium ${isRTL ? 'flex-row-reverse' : ''}`}>
+            {t['howFeeling']}
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <MoodSelector selectedMood={selectedMood} onMoodSelect={onMoodSelect} />
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
           <SidebarGroupContent className="flex flex-col gap-2 items-center">
-            <Link to="/recommendations" className="text-[10px] py-1 px-1.5 rounded mb-1 text-center bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200 w-48">
-              View recommendations
+            <Link to="/recommendations" className={`text-[10px] py-1 px-1.5 rounded mb-1 text-center bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200 w-48 ${isRTL ? 'text-right' : 'text-left'}`}>
+              {t['viewRecommendations']}
             </Link>
-            <button className="text-[10px] py-1 px-1.5 rounded mb-1 text-center bg-cyan-500 text-white hover:bg-cyan-600 transition-colors duration-200 w-48">
-              Do a new assessment
+            <button className={`text-[10px] py-1 px-1.5 rounded mb-1 text-center bg-cyan-500 text-white hover:bg-cyan-600 transition-colors duration-200 w-48 ${isRTL ? 'text-right' : 'text-left'}`}>
+              {t['newAssessment']}
             </button>
-            <button className="text-[10px] py-1 px-1.5 rounded mb-1 text-center bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200 w-48">
-              My assessments
+            <button className={`text-[10px] py-1 px-1.5 rounded mb-1 text-center bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors duration-200 w-48 ${isRTL ? 'text-right' : 'text-left'}`}>
+              {t['myAssessments']}
             </button>
           </SidebarGroupContent>
         </SidebarGroup>

@@ -2,6 +2,7 @@
 import React from 'react';
 import { Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface LanguageSwitcherProps {
   currentLanguage: string;
@@ -9,11 +10,18 @@ interface LanguageSwitcherProps {
 }
 
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ currentLanguage, onLanguageChange }) => {
+  // Handle language change and update document direction
+  const handleLanguageChange = () => {
+    const newLanguage = currentLanguage === 'en' ? 'he' : 'en';
+    onLanguageChange(newLanguage);
+    document.documentElement.dir = newLanguage === 'he' ? 'rtl' : 'ltr';
+  };
+
   return (
     <Button
       variant="ghost"
       size="sm"
-      onClick={() => onLanguageChange(currentLanguage === 'en' ? 'he' : 'en')}
+      onClick={handleLanguageChange}
       className="flex items-center space-x-1"
     >
       <Globe className="h-3 w-3" />

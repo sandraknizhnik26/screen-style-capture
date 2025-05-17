@@ -12,6 +12,17 @@ interface LanguageContextType {
 // Initial translations
 const translations = {
   en: {
+    // Common
+    'goodMorning': 'Good morning',
+    'settings': 'Settings',
+    'logout': 'Log out',
+    'viewRecommendations': 'View recommendations',
+    'newAssessment': 'Do a new assessment',
+    'myAssessments': 'My assessments',
+    'howFeeling': 'How am I feeling today?',
+    'task': 'Task',
+    'today': 'today',
+    
     // Assessment common
     'submit': 'Submit',
     'back': 'Back to Recommendations',
@@ -60,6 +71,17 @@ const translations = {
     'child.physicalActivity': 'Do you think physical activity helps you focus better?'
   },
   he: {
+    // Common
+    'goodMorning': 'בוקר טוב',
+    'settings': 'הגדרות',
+    'logout': 'התנתק',
+    'viewRecommendations': 'צפה בהמלצות',
+    'newAssessment': 'עשה הערכה חדשה',
+    'myAssessments': 'ההערכות שלי',
+    'howFeeling': 'איך אני מרגיש/ה היום?',
+    'task': 'משימה',
+    'today': 'היום',
+    
     // Assessment common
     'submit': 'שלח',
     'back': 'חזרה להמלצות',
