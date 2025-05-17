@@ -38,7 +38,7 @@ const Index = () => {
   const isRTL = language === 'he';
   const t = translations[language as 'en' | 'he'];
   
-  const [currentTask, setCurrentTask] = useState<Task | null>(null);
+  const [currentTaskId, setCurrentTaskId] = useState<string | null>(null);
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
   const [totalTime] = useState(1800);
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
@@ -106,6 +106,9 @@ const Index = () => {
   };
 
   const [tasks, setTasks] = useState<Task[]>(getTasks());
+  
+  // Derive current task from tasks and currentTaskId
+  const currentTask = currentTaskId ? tasks.find(task => task.id === currentTaskId) || null : null;
 
   // Update tasks when language changes, but keep completion state
   useEffect(() => {
@@ -117,7 +120,7 @@ const Index = () => {
   }, [language]);
 
   const handleTaskSelect = (task: Task) => {
-    setCurrentTask(task);
+    setCurrentTaskId(task.id);
     setTimeLeft(task.timeInSeconds || null);
   };
 
@@ -244,7 +247,7 @@ const Index = () => {
                         {...task}
                         onToggleComplete={toggleTaskCompletion}
                         onSelect={() => handleTaskSelect(task)}
-                        isSelected={currentTask?.id === task.id}
+                        isSelected={currentTaskId === task.id}
                       />
                     ))}
                   </div>
