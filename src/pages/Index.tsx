@@ -31,7 +31,7 @@ const Index = () => {
   const { theme, toggleTheme } = useTheme();
   const isDarkMode = theme === 'dark';
   const isRTL = language === 'he';
-  const t = translations[language];
+  const t = translations[language as 'en' | 'he'];
   
   const [currentTask, setCurrentTask] = useState<Task | null>(null);
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
@@ -39,58 +39,65 @@ const Index = () => {
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState(new Date());
 
-  const [tasks, setTasks] = useState<Task[]>([
+  const getTasks = () => [
     { 
       id: "1", 
-      title: "math homework (1,2,3,4,5,6 problems)", 
-      timeEstimation: "(45 minutes)", 
+      title: t['mathHomework'],
+      timeEstimation: `(45 ${t['minutes']})`, 
       completed: false, 
-      category: 'red',
+      category: 'red' as const,
       stars: 1,
       starValue: 10,
       timeInSeconds: 2700
     },
     { 
       id: "2", 
-      title: "Read & summarize a chapter from the book you are reading", 
-      timeEstimation: "(20 minutes)", 
+      title: t['readSummarize'],
+      timeEstimation: `(20 ${t['minutes']})`, 
       completed: true, 
-      category: 'green',
+      category: 'green' as const,
       stars: 2,
       starValue: 15,
       timeInSeconds: 1200
     },
     { 
       id: "3", 
-      title: "Draw or paint a picture of your favorite scene from the book you are reading", 
+      title: t['drawPaint'],
       timeEstimation: "", 
       completed: false, 
-      category: 'orange',
+      category: 'orange' as const,
       stars: 2,
       starValue: 15,
       timeInSeconds: 1800
     },
     { 
       id: "5", 
-      title: "Watch a fun educational video related to this week's science topic", 
-      timeEstimation: "(15 minutes)", 
+      title: t['watchVideo'],
+      timeEstimation: `(15 ${t['minutes']})`, 
       completed: false, 
-      category: 'yellow',
+      category: 'yellow' as const,
       stars: 3,
       starValue: 20,
       timeInSeconds: 900
     },
     { 
       id: "6", 
-      title: "Write down three interesting facts you learned", 
-      timeEstimation: "(10 minutes)", 
+      title: t['writeInterestingFacts'],
+      timeEstimation: `(10 ${t['minutes']})`, 
       completed: false, 
-      category: 'purple',
+      category: 'purple' as const,
       stars: 4,
       starValue: 30,
       timeInSeconds: 600
     },
-  ]);
+  ];
+
+  const [tasks, setTasks] = useState<Task[]>(getTasks());
+
+  // Update tasks when language changes
+  useEffect(() => {
+    setTasks(getTasks());
+  }, [language]);
 
   useEffect(() => {
     document.documentElement.dir = language === 'he' ? 'rtl' : 'ltr';

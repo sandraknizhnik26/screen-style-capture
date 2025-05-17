@@ -23,6 +23,22 @@ const translations = {
     'task': 'Task',
     'today': 'today',
     
+    // Clock component
+    'currentTask': 'Current Task',
+    'noTaskSelected': 'No task selected',
+    'minutesLeft': 'minutes left',
+    'timeDisplay': '{minutes}:{seconds}',
+    
+    // Task items
+    'mathHomework': 'math homework (1,2,3,4,5,6 problems)',
+    'readSummarize': 'Read & summarize a chapter from the book you are reading',
+    'drawPaint': 'Draw or paint a picture of your favorite scene from the book you are reading',
+    'watchVideo': 'Watch a fun educational video related to this week\'s science topic',
+    'writeInterestingFacts': 'Write down three interesting facts you learned',
+    
+    // Time estimations
+    'minutes': 'minutes',
+    
     // Assessment common
     'submit': 'Submit',
     'back': 'Back to Recommendations',
@@ -81,6 +97,22 @@ const translations = {
     'howFeeling': 'איך אני מרגיש/ה היום?',
     'task': 'משימה',
     'today': 'היום',
+    
+    // Clock component
+    'currentTask': 'משימה נוכחית',
+    'noTaskSelected': 'לא נבחרה משימה',
+    'minutesLeft': 'דקות נותרו',
+    'timeDisplay': '{minutes}:{seconds}',
+    
+    // Task items
+    'mathHomework': 'שיעורי בית במתמטיקה (בעיות 1,2,3,4,5,6)',
+    'readSummarize': 'קרא וסכם פרק מהספר שאתה קורא',
+    'drawPaint': 'צייר או צבע תמונה של הסצנה האהובה עליך מהספר שאתה קורא',
+    'watchVideo': 'צפה בסרטון חינוכי מהנה הקשור לנושא המדע של השבוע',
+    'writeInterestingFacts': 'כתוב שלוש עובדות מעניינות שלמדת',
+    
+    // Time estimations
+    'minutes': 'דקות',
     
     // Assessment common
     'submit': 'שלח',

@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Star } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface TaskItemProps {
   id: string;
@@ -34,6 +35,9 @@ const TaskItem: React.FC<TaskItemProps> = ({
   onSelect,
   isSelected
 }) => {
+  const { language } = useLanguage();
+  const isRTL = language === 'he';
+
   return (
     <div 
       className={`flex items-center p-2 rounded-md mb-1 ${categoryColors[category]} cursor-pointer hover:opacity-90 ${
@@ -41,7 +45,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
       }`}
       onClick={onSelect}
     >
-      <div className="mr-2" onClick={(e) => {
+      <div className={`${isRTL ? 'order-last ml-2' : 'order-first mr-2'}`} onClick={(e) => {
         e.stopPropagation();
         onToggleComplete(id);
       }}>
@@ -64,10 +68,10 @@ const TaskItem: React.FC<TaskItemProps> = ({
         </button>
       </div>
       <div className="flex-1">
-        <div className="text-[10px] text-gray-800">{title}</div>
-        <div className="text-[8px] text-gray-600">{timeEstimation}</div>
+        <div className={`text-[10px] text-gray-800 ${isRTL ? 'text-right' : 'text-left'}`}>{title}</div>
+        <div className={`text-[8px] text-gray-600 ${isRTL ? 'text-right' : 'text-left'}`}>{timeEstimation}</div>
       </div>
-      <div className="flex">
+      <div className={`flex ${isRTL ? 'order-first ml-2' : 'order-last'}`}>
         {[...Array(stars)].map((_, i) => (
           <Star key={i} className="h-3 w-3 text-yellow-500" fill="currentColor" />
         ))}

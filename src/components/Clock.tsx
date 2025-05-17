@@ -1,8 +1,10 @@
+
 import React, { useEffect, useState } from 'react';
 import { Play, Pause, RotateCcw } from 'lucide-react';
 import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Task {
   id: string;
@@ -27,6 +29,9 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime, cur
   const [isRunning, setIsRunning] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
   const isMobile = useIsMobile();
+  const { language, translations } = useLanguage();
+  const t = translations[language as 'en' | 'he'];
+  const isRTL = language === 'he';
   
   useEffect(() => {
     setTimeLeft(initialTimeLeft);
@@ -85,9 +90,9 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime, cur
         {format(currentTime, 'HH:mm')}
       </div>
       
-      <h2 className="text-sm font-medium mb-1">Current Task</h2>
-      <div className="text-center text-xs mb-2">
-        {currentTask ? currentTask.title : "No task selected"}
+      <h2 className={`text-sm font-medium mb-1 ${isRTL ? 'text-right w-full' : ''}`}>{t['currentTask']}</h2>
+      <div className={`text-center text-xs mb-2 ${isRTL ? 'text-right w-full' : ''}`}>
+        {currentTask ? (currentTask.title) : t['noTaskSelected']}
       </div>
 
       <div className={`relative ${clockSize}`}>
@@ -120,7 +125,7 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime, cur
             {timeDisplay}
           </span>
           <span className="text-xs opacity-60">
-            minutes left
+            {t['minutesLeft']}
           </span>
         </div>
       </div>

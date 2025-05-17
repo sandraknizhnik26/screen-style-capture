@@ -22,7 +22,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ currentLanguage, on
       variant="ghost"
       size="sm"
       onClick={handleLanguageChange}
-      className="flex items-center space-x-1"
+      className="flex items-center gap-1"
     >
       <Globe className="h-3 w-3" />
       <span className="text-xs">{currentLanguage === 'en' ? 'EN' : 'עב'}</span>
