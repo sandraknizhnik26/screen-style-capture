@@ -62,8 +62,10 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime, cur
     return () => clearInterval(intervalId);
   }, [isRunning]);
 
+  // Calculate progress only after the user has started the timer
+  // This ensures the circle starts empty (at 0%) when a new task is selected
   const progress = hasStarted 
-    ? Math.min(100, Math.max(0, (timeLeft / totalTime) * 100))
+    ? Math.min(100, Math.max(0, (timeLeft / (currentTask?.timeInSeconds || totalTime)) * 100))
     : 0;
   
   const radius = isMobile ? 70 : 70;
