@@ -28,16 +28,22 @@ const Clock: React.FC<ClockProps> = ({ timeLeft: initialTimeLeft, totalTime, cur
   const [timeLeft, setTimeLeft] = useState(initialTimeLeft);
   const [isRunning, setIsRunning] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
+  const [currentTaskId, setCurrentTaskId] = useState<string | null>(null);
   const isMobile = useIsMobile();
   const { language, translations } = useLanguage();
   const t = translations[language as 'en' | 'he'];
   const isRTL = language === 'he';
   
+  // Reset clock state when task changes
   useEffect(() => {
-    setTimeLeft(initialTimeLeft);
-    setIsRunning(false);
-    setHasStarted(false);
-  }, [initialTimeLeft]);
+    // Check if task has changed by comparing IDs
+    if (currentTask?.id !== currentTaskId) {
+      setTimeLeft(initialTimeLeft);
+      setIsRunning(false);
+      setHasStarted(false);
+      setCurrentTaskId(currentTask?.id || null);
+    }
+  }, [initialTimeLeft, currentTask, currentTaskId]);
 
   useEffect(() => {
     const timer = setInterval(() => {
