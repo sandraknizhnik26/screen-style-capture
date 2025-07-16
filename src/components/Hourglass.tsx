@@ -79,101 +79,152 @@ const Hourglass: React.FC<HourglassProps> = ({ timeLeft: initialTimeLeft, totalT
     setHasStarted(false);
   };
 
-  const hourglassSize = isMobile ? "w-48 h-64" : "w-52 h-72";
+  const hourglassSize = isMobile ? "w-56 h-72" : "w-64 h-80";
 
   return (
-    <div className="flex flex-col items-center justify-center w-full p-2">
-      <div className="text-xl font-medium mb-2">
+    <div className="flex flex-col items-center justify-center w-full p-4">
+      {/* Current time with cheerful styling */}
+      <div className="text-2xl font-bold mb-4 text-primary bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
         {format(currentTime, 'HH:mm')}
       </div>
       
-      <h2 className={`text-sm font-medium mb-1 ${isRTL ? 'text-right w-full' : ''}`}>{t['currentTask']}</h2>
-      <div className={`text-center text-xs mb-4 ${isRTL ? 'text-right w-full' : ''}`}>
+      <h2 className={`text-lg font-semibold mb-2 text-primary ${isRTL ? 'text-right w-full' : ''}`}>
+        {t['currentTask']}
+      </h2>
+      <div className={`text-center text-sm mb-6 text-muted-foreground font-medium ${isRTL ? 'text-right w-full' : ''}`}>
         {currentTask ? (currentTask.title) : t['noTaskSelected']}
       </div>
 
-      <div className={`relative ${hourglassSize} mb-4`}>
-        <svg className="w-full h-full" viewBox="0 0 200 280" fill="none">
-          {/* Hourglass frame */}
+      <div className={`relative ${hourglassSize} mb-6`}>
+        {/* Decorative background glow */}
+        <div className="absolute inset-0 bg-gradient-to-br from-yellow-200/30 via-orange-200/20 to-pink-200/30 rounded-full blur-xl animate-pulse"></div>
+        
+        <svg className="w-full h-full relative z-10" viewBox="0 0 240 320" fill="none">
+          {/* Hourglass frame with gradient border */}
+          <defs>
+            <linearGradient id="frameGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="rgb(147, 51, 234)" />
+              <stop offset="50%" stopColor="rgb(59, 130, 246)" />
+              <stop offset="100%" stopColor="rgb(16, 185, 129)" />
+            </linearGradient>
+            <linearGradient id="sandGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="rgb(251, 191, 36)" />
+              <stop offset="50%" stopColor="rgb(245, 158, 11)" />
+              <stop offset="100%" stopColor="rgb(217, 119, 6)" />
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          
+          {/* Main hourglass shape */}
           <path 
-            d="M40 20 L160 20 L160 40 L140 60 L140 120 L100 140 L140 160 L140 220 L160 240 L160 260 L40 260 L40 240 L60 220 L60 160 L100 140 L60 120 L60 60 L40 40 Z" 
+            d="M60 30 L180 30 L180 50 L160 70 L160 130 L120 150 L160 170 L160 230 L180 250 L180 270 L60 270 L60 250 L80 230 L80 170 L120 150 L80 130 L80 70 L60 50 Z" 
             fill="none" 
-            stroke="currentColor" 
-            strokeWidth="3"
-            className="text-gray-400"
+            stroke="url(#frameGradient)"
+            strokeWidth="4"
+            filter="url(#glow)"
+            className="drop-shadow-lg"
           />
           
-          {/* Top sand (remaining) */}
+          {/* Top sand chamber mask */}
           <defs>
             <mask id="topSand">
-              <rect width="200" height="280" fill="black"/>
+              <rect width="240" height="320" fill="black"/>
               <path 
-                d="M45 25 L155 25 L155 35 L135 55 L135 115 L100 135 L65 115 L65 55 L45 35 Z" 
+                d="M65 35 L175 35 L175 45 L155 65 L155 125 L120 145 L85 125 L85 65 L65 45 Z" 
                 fill="white"
               />
             </mask>
           </defs>
           
+          {/* Top sand (remaining) with gradient */}
           <rect
-            x="45"
-            y="25"
+            x="65"
+            y="35"
             width="110"
-            height={`${115 * (100 - progress) / 100}`}
-            fill="currentColor"
-            className="text-yellow-400 transition-all duration-1000 ease-linear"
+            height={`${110 * (100 - progress) / 100}`}
+            fill="url(#sandGradient)"
             mask="url(#topSand)"
+            className="transition-all duration-1000 ease-linear drop-shadow-sm"
           />
           
-          {/* Bottom sand (completed) */}
+          {/* Bottom sand chamber mask */}
           <defs>
             <mask id="bottomSand">
-              <rect width="200" height="280" fill="black"/>
+              <rect width="240" height="320" fill="black"/>
               <path 
-                d="M65 165 L100 145 L135 165 L135 225 L155 245 L155 255 L45 255 L45 245 L65 225 Z" 
+                d="M85 175 L120 155 L155 175 L155 235 L175 255 L175 265 L65 265 L65 255 L85 235 Z" 
                 fill="white"
               />
             </mask>
           </defs>
           
+          {/* Bottom sand (completed) with gradient */}
           <rect
-            x="45"
-            y={255 - (110 * progress / 100)}
+            x="65"
+            y={265 - (110 * progress / 100)}
             width="110"
             height={`${110 * progress / 100}`}
-            fill="currentColor"
-            className="text-yellow-400 transition-all duration-1000 ease-linear"
+            fill="url(#sandGradient)"
             mask="url(#bottomSand)"
+            className="transition-all duration-1000 ease-linear drop-shadow-sm"
           />
           
-          {/* Falling sand animation when running */}
+          {/* Enhanced falling sand animation */}
           {isRunning && (
-            <g className="animate-pulse">
-              <circle cx="100" cy="140" r="1" fill="currentColor" className="text-yellow-400 opacity-70">
-                <animate attributeName="cy" values="135;145;135" dur="0.8s" repeatCount="indefinite"/>
+            <g>
+              {/* Main sand stream */}
+              <circle cx="120" cy="150" r="1.5" fill="url(#sandGradient)" className="opacity-80">
+                <animate attributeName="cy" values="145;155;145" dur="0.6s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0;1;0" dur="0.6s" repeatCount="indefinite"/>
+              </circle>
+              
+              {/* Secondary particles */}
+              <circle cx="118" cy="150" r="1" fill="url(#sandGradient)" className="opacity-60">
+                <animate attributeName="cy" values="147;153;147" dur="0.8s" repeatCount="indefinite"/>
                 <animate attributeName="opacity" values="0;1;0" dur="0.8s" repeatCount="indefinite"/>
               </circle>
-              <circle cx="98" cy="140" r="0.5" fill="currentColor" className="text-yellow-400 opacity-50">
-                <animate attributeName="cy" values="137;143;137" dur="1s" repeatCount="indefinite"/>
+              <circle cx="122" cy="150" r="1" fill="url(#sandGradient)" className="opacity-60">
+                <animate attributeName="cy" values="146;154;146" dur="1s" repeatCount="indefinite"/>
                 <animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite"/>
               </circle>
-              <circle cx="102" cy="140" r="0.5" fill="currentColor" className="text-yellow-400 opacity-50">
-                <animate attributeName="cy" values="136;144;136" dur="1.2s" repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="0;1;0" dur="1.2s" repeatCount="indefinite"/>
+              
+              {/* Sparkle effects */}
+              <circle cx="116" cy="150" r="0.5" fill="rgb(251, 191, 36)" className="opacity-40">
+                <animate attributeName="cy" values="148;152;148" dur="1.2s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0;0.8;0" dur="1.2s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="124" cy="150" r="0.5" fill="rgb(251, 191, 36)" className="opacity-40">
+                <animate attributeName="cy" values="144;156;144" dur="0.9s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0;0.8;0" dur="0.9s" repeatCount="indefinite"/>
               </circle>
             </g>
           )}
+          
+          {/* Decorative stars around the hourglass */}
+          <g className="animate-pulse">
+            <circle cx="40" cy="80" r="2" fill="rgb(251, 191, 36)" className="opacity-60" />
+            <circle cx="200" cy="120" r="1.5" fill="rgb(147, 51, 234)" className="opacity-70" />
+            <circle cx="50" cy="200" r="1" fill="rgb(59, 130, 246)" className="opacity-60" />
+            <circle cx="190" cy="240" r="2" fill="rgb(16, 185, 129)" className="opacity-50" />
+          </g>
         </svg>
         
-        {/* Gentle progress indicator */}
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-6">
-          <div className="flex space-x-1">
+        {/* Enhanced progress indicator with colorful dots */}
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-8">
+          <div className="flex space-x-2">
             {[...Array(5)].map((_, i) => (
               <div 
                 key={i}
-                className={`w-2 h-2 rounded-full transition-all duration-500 ${
+                className={`w-3 h-3 rounded-full transition-all duration-700 ${
                   i < Math.floor(progress / 20) 
-                    ? 'bg-yellow-400' 
-                    : 'bg-gray-200'
+                    ? 'bg-gradient-to-r from-yellow-400 to-orange-400 shadow-lg scale-110' 
+                    : 'bg-gray-200 dark:bg-gray-600'
                 }`}
               />
             ))}
@@ -181,20 +232,29 @@ const Hourglass: React.FC<HourglassProps> = ({ timeLeft: initialTimeLeft, totalT
         </div>
       </div>
 
-      <div className="flex gap-2 mt-6">
+      {/* Enhanced control buttons */}
+      <div className="flex gap-3 mt-8">
         <Button
           variant="outline"
           size="icon"
           onClick={handlePlayPause}
-          className={isMobile ? "w-10 h-10" : "w-12 h-12"}
+          className={`${isMobile ? "w-12 h-12" : "w-14 h-14"} ${
+            isRunning 
+              ? 'border-orange-300 hover:border-orange-400 shadow-lg shadow-orange-200/50' 
+              : hasStarted && !isRunning 
+                ? 'border-green-300 hover:border-green-400 shadow-lg shadow-green-200/50'
+                : 'border-blue-300 hover:border-blue-400 shadow-lg shadow-blue-200/50'
+          } transition-all duration-300`}
         >
           {isRunning ? (
             <Pause 
-              className={`${isMobile ? "h-5 w-5" : "h-6 w-6"} text-yellow-500`}
+              className={`${isMobile ? "h-6 w-6" : "h-7 w-7"} text-orange-500`}
             />
           ) : (
             <Play 
-              className={`${isMobile ? "h-5 w-5" : "h-6 w-6"} ${hasStarted && !isRunning ? 'text-green-500' : ''}`} 
+              className={`${isMobile ? "h-6 w-6" : "h-7 w-7"} ${
+                hasStarted && !isRunning ? 'text-green-500' : 'text-blue-500'
+              }`} 
             />
           )}
         </Button>
@@ -202,11 +262,20 @@ const Hourglass: React.FC<HourglassProps> = ({ timeLeft: initialTimeLeft, totalT
           variant="outline"
           size="icon"
           onClick={handleReset}
-          className={isMobile ? "w-10 h-10" : "w-12 h-12"}
+          className={`${isMobile ? "w-12 h-12" : "w-14 h-14"} border-purple-300 hover:border-purple-400 shadow-lg shadow-purple-200/50 transition-all duration-300`}
         >
-          <RotateCcw className={isMobile ? "h-5 w-5" : "h-6 w-6"} />
+          <RotateCcw className={`${isMobile ? "h-6 w-6" : "h-7 w-7"} text-purple-500`} />
         </Button>
       </div>
+
+      {/* Motivational message */}
+      {isRunning && (
+        <div className="mt-4 text-center">
+          <p className="text-sm font-medium text-primary animate-bounce">
+            🌟 {language === 'he' ? 'מתקדמים יפה!' : 'Great progress!'} 🌟
+          </p>
+        </div>
+      )}
     </div>
   );
 };
