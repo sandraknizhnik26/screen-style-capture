@@ -4,7 +4,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 import Logo from '@/components/Logo';
-import Clock from '@/components/Clock';
+import Hourglass from '@/components/Hourglass';
 import TaskItem from '@/components/TaskItem';
 import MoodSelector from '@/components/MoodSelector';
 import ProgressBar from '@/components/ProgressBar';
@@ -223,7 +223,7 @@ const Index = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 h-full">
               <div className={`${isDarkMode ? 'bg-gray-700' : 'bg-white'} rounded-lg border ${isDarkMode ? 'border-gray-600' : 'border-gray-200'} p-3 shadow-sm transition-colors duration-200`}>
-                <Clock 
+                <Hourglass 
                   timeLeft={timeLeft || 0} 
                   totalTime={totalTime} 
                   currentTask={currentTask}
