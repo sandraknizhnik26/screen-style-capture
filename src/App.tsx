@@ -10,6 +10,7 @@ import Recommendations from "./pages/Recommendations";
 import TeacherAssessment from "./pages/TeacherAssessment";
 import ParentAssessment from "./pages/ParentAssessment"; 
 import ChildAssessment from "./pages/ChildAssessment";
+import Celebration from "./pages/Celebration";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 
@@ -29,6 +30,7 @@ const App = () => (
               <Route path="/assessment/teacher" element={<TeacherAssessment />} />
               <Route path="/assessment/parent" element={<ParentAssessment />} />
               <Route path="/assessment/child" element={<ChildAssessment />} />
+              <Route path="/celebration" element={<Celebration />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
